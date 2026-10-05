@@ -1,0 +1,25 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { siteConfig } from '../data/siteConfig';
+
+interface Props {
+  frontmatter?: { title?: string };
+  title?: string;
+}
+
+const { frontmatter } = Astro.props;
+const title = frontmatter?.title ?? Astro.props.title ?? '';
+const pageTitle = title ? `${title} | ${siteConfig.siteName}` : siteConfig.siteName;
+---
+
+<BaseLayout title={pageTitle} bodyClass="page-content">
+  <Header />
+  <hr class="content-rule" />
+  <main class="content-body">
+    {title && <h1 class="section-title">{title}</h1>}
+    <slot />
+  </main>
+  <Footer />
+</BaseLayout>

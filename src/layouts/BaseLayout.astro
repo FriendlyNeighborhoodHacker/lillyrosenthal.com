@@ -1,0 +1,36 @@
+---
+import '../styles/global.css';
+import { siteConfig } from '../data/siteConfig';
+
+interface Props {
+  title?: string;
+  bodyClass?: string;
+  description?: string;
+}
+
+const {
+  title = siteConfig.siteName,
+  bodyClass = 'page-content',
+  description = 'Lilly Rosenthal — actor. Performance reels, speeches, and bio.',
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&display=swap">
+</head>
+<body class={bodyClass}>
+  <slot />
+  {import.meta.env.DEV && (
+    <a href="/__media/" class="dev-media-link" title="Dev only: browse / upload the Cloudflare media bucket">media admin</a>
+  )}
+</body>
+</html>

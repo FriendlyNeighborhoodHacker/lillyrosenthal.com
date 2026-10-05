@@ -1,0 +1,35 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  /** Path under src/assets, e.g. 'images/bio/lilly_as_annabeth.jpeg'. */
+  src: string;
+  alt?: string;
+  float?: 'left' | 'right' | 'center';
+  link?: string;
+}
+
+const { src, alt = '', float = 'right', link } = Astro.props;
+
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/**/*.{jpeg,jpg,png,gif,webp}');
+const imagePath = `/src/assets/${src}`;
+const imageModule = images[imagePath];
+
+if (!imageModule) {
+  console.warn(`Image not found: ${imagePath}`);
+}
+
+const isExternal = link?.startsWith('http');
+---
+
+{imageModule && (
+  <figure class={`bio-figure bio-${float}`}>
+    {link ? (
+      <a href={link} target={isExternal ? '_blank' : undefined} rel={isExternal ? 'noopener noreferrer' : undefined}>
+        <Image src={imageModule()} alt={alt} width={600} />
+      </a>
+    ) : (
+      <Image src={imageModule()} alt={alt} width={600} />
+    )}
+  </figure>
+)}

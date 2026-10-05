@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Slideshow from '../components/Slideshow.astro';
+import { sections } from '../data/sections';
+import { siteConfig } from '../data/siteConfig';
+
+export function getStaticPaths() {
+  return sections.map((section) => ({ params: { section: section.slug }, props: { section } }));
+}
+
+const { section } = Astro.props;
+---
+
+<BaseLayout title={`${section.name} | ${siteConfig.siteName}`} bodyClass="page-home">
+  <Header />
+  <Slideshow slides={section.slides} showCounter={siteConfig.showCounter} smartStart={true} />
+</BaseLayout>

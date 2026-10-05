@@ -1,0 +1,207 @@
+{
+  "generatedAt": "2026-10-05T19:04:24.254Z",
+  "clips": {
+    "annabeth/01_IMG_3655": {
+      "section": "annabeth",
+      "type": "video",
+      "src": "/media/annabeth/01_IMG_3655.mp4",
+      "poster": "/media/annabeth/01_IMG_3655.poster.jpg",
+      "width": 720,
+      "height": 1280,
+      "duration": 42.47,
+      "bytes": 13562678
+    },
+    "annabeth/02_IMG_6923": {
+      "section": "annabeth",
+      "type": "video",
+      "src": "/media/annabeth/02_IMG_6923.mp4",
+      "poster": "/media/annabeth/02_IMG_6923.poster.jpg",
+      "width": 1280,
+      "height": 720,
+      "duration": 8.24,
+      "bytes": 2884222
+    },
+    "gomez/01_IMG_1136": {
+      "section": "gomez",
+      "type": "video",
+      "src": "/media/gomez/01_IMG_1136.mp4",
+      "poster": "/media/gomez/01_IMG_1136.poster.jpg",
+      "width": 1280,
+      "height": 720,
+      "duration": 34.37,
+      "bytes": 9743165
+    },
+    "gomez/02_IMG_1212": {
+      "section": "gomez",
+      "type": "video",
+      "src": "/media/gomez/02_IMG_1212.mp4",
+      "poster": "/media/gomez/02_IMG_1212.poster.jpg",
+      "width": 1280,
+      "height": 720,
+      "duration": 17.6,
+      "bytes": 4930488
+    },
+    "gomez/03_IMG_1232": {
+      "section": "gomez",
+      "type": "video",
+      "src": "/media/gomez/03_IMG_1232.mp4",
+      "poster": "/media/gomez/03_IMG_1232.poster.jpg",
+      "width": 404,
+      "height": 720,
+      "duration": 14.43,
+      "bytes": 1568105
+    },
+    "gomez/04_IMG_1126": {
+      "section": "gomez",
+      "type": "video",
+      "src": "/media/gomez/04_IMG_1126.mp4",
+      "poster": "/media/gomez/04_IMG_1126.poster.jpg",
+      "width": 1280,
+      "height": 720,
+      "duration": 20.72,
+      "bytes": 5407951
+    },
+    "snoopy/01_IMG_1894_1": {
+      "section": "snoopy",
+      "type": "video",
+      "src": "/media/snoopy/01_IMG_1894_1.mp4",
+      "poster": "/media/snoopy/01_IMG_1894_1.poster.jpg",
+      "width": 1920,
+      "height": 1080,
+      "duration": 17.34,
+      "bytes": 12007275
+    },
+    "snoopy/02_IMG_1863": {
+      "section": "snoopy",
+      "type": "video",
+      "src": "/media/snoopy/02_IMG_1863.mp4",
+      "poster": "/media/snoopy/02_IMG_1863.poster.jpg",
+      "width": 1920,
+      "height": 1080,
+      "duration": 15.09,
+      "bytes": 9929489
+    },
+    "snoopy/03_IMG_1883": {
+      "section": "snoopy",
+      "type": "video",
+      "src": "/media/snoopy/03_IMG_1883.mp4",
+      "poster": "/media/snoopy/03_IMG_1883.poster.jpg",
+      "width": 1920,
+      "height": 1080,
+      "duration": 7.71,
+      "bytes": 6450335
+    },
+    "snoopy/03a_IMG_1894": {
+      "section": "snoopy",
+      "type": "video",
+      "src": "/media/snoopy/03a_IMG_1894.mp4",
+      "poster": "/media/snoopy/03a_IMG_1894.poster.jpg",
+      "width": 1920,
+      "height": 1080,
+      "duration": 111.28,
+      "bytes": 69437285
+    },
+    "snoopy/04_IMG_1884": {
+      "section": "snoopy",
+      "type": "video",
+      "src": "/media/snoopy/04_IMG_1884.mp4",
+      "poster": "/media/snoopy/04_IMG_1884.poster.jpg",
+      "width": 1920,
+      "height": 1080,
+      "duration": 14.52,
+      "bytes": 11577298
+    },
+    "snoopy/05_IMG_1885": {
+      "section": "snoopy",
+      "type": "video",
+      "src": "/media/snoopy/05_IMG_1885.mp4",
+      "poster": "/media/snoopy/05_IMG_1885.poster.jpg",
+      "width": 1920,
+      "height": 1080,
+      "duration": 15.75,
+      "bytes": 11493622
+    },
+    "speeches/01_IMG_8899": {
+      "section": "speeches",
+      "type": "video",
+      "src": "/media/speeches/01_IMG_8899.mp4",
+      "poster": "/media/speeches/01_IMG_8899.poster.jpg",
+      "width": 1280,
+      "height": 720,
+      "duration": 28.97,
+      "bytes": 7350949
+    },
+    "speeches/02_b4094358-3c45-4aa4-927d-bebfa2a4e89b": {
+      "section": "speeches",
+      "type": "video",
+      "src": "/media/speeches/02_b4094358-3c45-4aa4-927d-bebfa2a4e89b.mp4",
+      "poster": "/media/speeches/02_b4094358-3c45-4aa4-927d-bebfa2a4e89b.poster.jpg",
+      "width": 848,
+      "height": 480,
+      "duration": 25.9,
+      "bytes": 7277329
+    },
+    "speeches/03_IMG_5230": {
+      "section": "speeches",
+      "type": "video",
+      "src": "/media/speeches/03_IMG_5230.mp4",
+      "poster": "/media/speeches/03_IMG_5230.poster.jpg",
+      "width": 1280,
+      "height": 720,
+      "duration": 10.5,
+      "bytes": 2674188
+    },
+    "speeches/2026_vice_president_speech_lilly": {
+      "section": "speeches",
+      "type": "video",
+      "src": "/media/speeches/2026_vice_president_speech_lilly.mp4",
+      "poster": "/media/speeches/2026_vice_president_speech_lilly.poster.jpg",
+      "width": 986,
+      "height": 946,
+      "duration": 78.37,
+      "bytes": 9765020
+    },
+    "speeches/MOV_8271": {
+      "section": "speeches",
+      "type": "video",
+      "src": "/media/speeches/MOV_8271.mp4",
+      "poster": "/media/speeches/MOV_8271.poster.jpg",
+      "width": 540,
+      "height": 960,
+      "duration": 78.72,
+      "bytes": 12854060
+    },
+    "stills/annabeth_still1": {
+      "section": "stills",
+      "type": "image",
+      "src": "/media/stills/annabeth_still1.jpg",
+      "width": 404,
+      "height": 720,
+      "bytes": 92109
+    },
+    "stills/jumping": {
+      "section": "stills",
+      "type": "image",
+      "src": "/media/stills/jumping.jpg",
+      "width": 1920,
+      "height": 1280,
+      "bytes": 742323
+    },
+    "stills/kicking": {
+      "section": "stills",
+      "type": "image",
+      "src": "/media/stills/kicking.jpg",
+      "width": 1920,
+      "height": 1280,
+      "bytes": 750296
+    },
+    "stills/lilly_as_annabeth": {
+      "section": "stills",
+      "type": "image",
+      "src": "/media/stills/lilly_as_annabeth.jpg",
+      "width": 909,
+      "height": 1280,
+      "bytes": 350623
+    }
+  }
+}

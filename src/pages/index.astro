@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Slideshow from '../components/Slideshow.astro';
+import { homeSlides } from '../data/homeSlides';
+import { siteConfig } from '../data/siteConfig';
+---
+
+<BaseLayout title={siteConfig.siteName} bodyClass="page-home">
+  <Header />
+  <Slideshow slides={homeSlides} />
+</BaseLayout>

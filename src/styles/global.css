@@ -1,0 +1,487 @@
+/* ======================================================
+   LILLY ROSENTHAL — Site Stylesheet
+   (ported from judyrosenthal.com; slideshow is video-aware)
+   ====================================================== */
+
+/* ----- Reset & Base ----- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: Georgia, 'Times New Roman', serif;
+  color: #222;
+  background: white;
+  overflow-x: hidden;
+}
+
+.page-home {
+  background: #000;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ======================================================
+   HEADER
+   ====================================================== */
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 32px;
+  z-index: 100;
+}
+
+/* Homepage + section pages: float above the slideshow */
+.page-home .site-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+/* Content pages: normal flow, white background */
+.page-content .site-header {
+  position: relative;
+  background: white;
+}
+
+/* ----- Site Title ("LILLY ROSENTHAL") ----- */
+.site-title {
+  font-family: 'Josefin Sans', 'Optima', 'Gill Sans', 'Gill Sans MT', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1.65rem;
+  font-weight: 300;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.page-home.menu-white .site-title { color: white; }
+.page-home.menu-black .site-title { color: black; }
+.page-content .site-title        { color: black; }
+
+/* ======================================================
+   NAVIGATION MENU
+   ====================================================== */
+
+.nav-toggle {
+  display: none;           /* hidden on desktop; shown on mobile */
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.6rem;
+  line-height: 1;
+  padding: 4px 0;
+}
+
+.page-home.menu-white .nav-toggle { color: white; }
+.page-home.menu-black .nav-toggle { color: black; }
+.page-content .nav-toggle         { color: black; }
+
+.nav-menu {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-menu > li {
+  position: relative;
+}
+
+.nav-menu > li > a {
+  font-family: 'Optima', 'Gill Sans', 'Gill Sans MT', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1.3em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: block;
+  padding: 4px 0;
+}
+
+.page-home.menu-white .nav-menu > li > a { color: white; }
+.page-home.menu-black .nav-menu > li > a { color: black; }
+.page-content .nav-menu > li > a         { color: black; }
+
+/* ======================================================
+   CONTENT PAGES (bio)
+   ====================================================== */
+
+.content-rule {
+  border: none;
+  border-top: 1px solid #222;
+  margin: 0;
+}
+
+.content-body {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 15px 22px 40px;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: #222;
+}
+
+.content-body p {
+  margin-bottom: 1.25rem;
+}
+
+.content-body::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.section-title {
+  font-family: 'Josefin Sans', 'Optima', 'Gill Sans', 'Gill Sans MT', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin: 1rem 0 1.5rem;
+  color: #222;
+}
+
+/* ----- Floating bio images ----- */
+.bio-figure {
+  margin: 0;
+}
+
+.bio-right {
+  float: right;
+  width: 32%;
+  max-width: 280px;
+  margin: 0 0 1.5rem 2rem;
+}
+
+.bio-left {
+  float: left;
+  width: 32%;
+  max-width: 280px;
+  margin: 0 2rem 1.5rem 0;
+}
+
+.bio-center {
+  display: block;
+  width: 40%;
+  max-width: 320px;
+  margin: 0 auto 2.5rem;
+}
+
+.bio-figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ======================================================
+   FULL-BLEED SLIDESHOW
+   ====================================================== */
+
+.slideshow-wrapper {
+  overflow: hidden;
+  width: 100%;
+}
+
+.slideshow {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  height: 100vh;               /* overridden per viewport by Slideshow.astro (siteConfig.stage) */
+  background: #000;
+}
+
+/* ----- Individual slides ----- */
+.slide {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  cursor: pointer;
+  pointer-events: none;        /* invisible slides must not intercept clicks */
+}
+
+.slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* The <video>/<img>. Sized + positioned by layoutMedia() in Slideshow.astro
+   (focal-point fit). Before JS runs, fall back to a plain centered cover. */
+.media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  max-width: none;
+  max-height: none;
+  will-change: transform;
+}
+
+.media:not(.laid-out) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* ======================================================
+   TITLE OVERLAY (boxed label, as on judyrosenthal.com)
+   ====================================================== */
+
+.slide-title {
+  position: absolute;
+  bottom: 40px;
+  left: 32px;
+  z-index: 40;
+  pointer-events: auto;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.82rem;
+  font-weight: normal;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+.slide-title[hidden] { display: none; }
+
+.slide-title.boxed {
+  background: var(--title-bg, #000);
+  color: var(--title-color, #fff);
+  padding: 16px 20px;
+}
+
+.page-home.menu-white .slide-title:not(.boxed) { color: white; }
+.page-home.menu-black .slide-title:not(.boxed) { color: black; }
+
+a.slide-title-text { color: inherit; }
+a.slide-title-text:hover { text-decoration: underline; }
+
+.slide-title-count {
+  opacity: 0.6;
+  margin-left: 0.4em;
+}
+
+/* ----- Prev / Next arrows ----- */
+.slide-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 3.5rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 10px 20px;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.7);
+  user-select: none;
+  transition: opacity 0.2s;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.slide-arrow:hover { opacity: 0.65; }
+.slide-arrow.prev { left: 6px; }
+.slide-arrow.next { right: 6px; }
+
+/* ----- Floating player controls (sound / pause): top right, under the menu ----- */
+.player-controls {
+  position: absolute;
+  top: 84px;                   /* header is ~76px tall on desktop */
+  right: 32px;                 /* flush with the menu's right edge */
+  z-index: 60;
+  display: flex;
+  gap: 10px;
+}
+
+.player-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: rgba(0, 0, 0, 0.38);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: background 0.2s, opacity 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.player-btn:hover { background: rgba(0, 0, 0, 0.6); }
+.player-btn[hidden] { display: none; }
+
+.player-btn svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+}
+
+/* Clip clock (file seconds, for picking start / end): bottom right. */
+.clip-clock {
+  position: absolute;
+  right: 24px;
+  bottom: 40px;                /* narrow screens: above the title bar (Slideshow.astro) */
+  z-index: 60;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.55);
+  color: white;
+  font-family: 'SF Mono', Menlo, Consolas, 'Courier New', monospace;
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.clip-clock .clock-now { font-weight: bold; }
+.clip-clock[hidden] { display: none; }
+
+/* Sound wanted but the browser is waiting for a tap: dim the icon + show a hint. */
+.player-btn.is-pending { opacity: 0.7; }
+
+.sound-hint {
+  align-self: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.55);
+  color: white;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.sound-hint[hidden] { display: none; }
+
+/* Each button holds two icons; a state class picks one. */
+.player-btn .icon-on, .player-btn .icon-pause { display: none; }
+.player-btn.is-on .icon-on { display: block; }
+.player-btn.is-on .icon-off { display: none; }
+.player-btn.is-playing .icon-pause { display: block; }
+.player-btn.is-playing .icon-play { display: none; }
+
+/* ======================================================
+   FOOTER
+   ====================================================== */
+
+.site-footer {
+  padding: 20px 32px;
+  text-align: center;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: #999;
+  background: white;
+}
+
+/* ======================================================
+   MOBILE  (≤ 768 px)
+   ====================================================== */
+
+@media (max-width: 768px) {
+  .site-header {
+    padding: 18px 20px;
+  }
+
+  .site-title {
+    font-size: 1.3rem;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    flex-direction: column;
+    gap: 0;
+    min-width: 230px;
+    padding: 8px 0;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14);
+    z-index: 300;
+  }
+
+  .nav-menu.open {
+    display: flex;
+  }
+
+  .nav-menu > li > a {
+    display: block;
+    padding: 10px 20px;
+    color: #222 !important;
+    text-shadow: none !important;
+  }
+
+  .slide-title {
+    font-size: 0.72rem;
+  }
+
+  .player-controls {
+    top: 78px;                 /* header is ~70px tall on mobile */
+    right: 20px;
+  }
+
+  .bio-right {
+    float: right;
+    width: 46%;
+    max-width: none;
+    margin: 0 0 1rem 0.75rem;
+  }
+
+  .bio-left {
+    float: left;
+    width: 46%;
+    max-width: none;
+    margin: 0 0.75rem 1rem 0;
+  }
+
+  .bio-center {
+    float: none;
+    width: 100%;
+    max-width: none;
+  }
+}
+
+/* ======================================================
+   DEV ONLY — link to /__media/ (rendered only in `astro dev`)
+   ====================================================== */
+
+.dev-media-link {
+  position: fixed;
+  left: 12px;
+  bottom: 12px;
+  z-index: 1000;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+.dev-media-link:hover { opacity: 1; }

@@ -1,0 +1,27 @@
+---
+import { menu } from '../data/menu';
+import { siteConfig } from '../data/siteConfig';
+---
+
+<header class="site-header">
+  <a href="/" class="site-title">{siteConfig.siteName}</a>
+  <nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+    <ul class="nav-menu" id="nav-menu">
+      {menu.map((item) => (
+        <li><a href={item.url}>{item.name}</a></li>
+      ))}
+    </ul>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const navMenu = document.getElementById('nav-menu');
+  if (toggle && navMenu) {
+    toggle.addEventListener('click', () => {
+      const open = navMenu.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+  }
+</script>
