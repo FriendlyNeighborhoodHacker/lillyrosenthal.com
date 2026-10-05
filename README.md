@@ -22,27 +22,35 @@ media files and no R2 credentials, only `PUBLIC_MEDIA_BASE`.
 
 ### One-time server setup
 
+Layout on the VPS (all under the site user's home):
+
+| Path | Purpose |
+| --- | --- |
+| `~/deploy/lillyrosenthal.org/` | git checkout; built here, never served |
+| `~/deploy/lillyrosenthal.org.secrets/` | `.env` (PUBLIC_MEDIA_BASE) and `config.local.php` (webhook secret + paths); `chmod 700` |
+| `~/lillyrosenthal.org/` | web root; replaced by `dist/` on every deploy |
+
 ```sh
-# as the site user, on the VPS (Node >= 22.12 must be on the PATH)
-git clone <repo> /home/lillydebate/lillyrosenthal.com     # the checkout lives OUTSIDE the web root
-cd /home/lillydebate/lillyrosenthal.com
-cp .env.example .env            # set PUBLIC_MEDIA_BASE=https://lillyrosenthalmedia.com
-bash scripts/deploy.sh          # first build + publish into /home/lillydebate/lillyrosenthal.org
-cp public/config.local.php.example /home/lillydebate/lillyrosenthal.org/config.local.php
-# edit that config.local.php: set webhook_secret (any long random string)
+mkdir -p ~/deploy/lillyrosenthal.org.secrets && chmod 700 ~/deploy/lillyrosenthal.org.secrets
+git clone <repo> ~/deploy/lillyrosenthal.org
+cd ~/deploy/lillyrosenthal.org
+cp .env.example ../lillyrosenthal.org.secrets/.env                        # set PUBLIC_MEDIA_BASE=https://lillyrosenthalmedia.com
+cp public/config.local.php.example ../lillyrosenthal.org.secrets/config.local.php   # set webhook_secret
+chmod 600 ../lillyrosenthal.org.secrets/*
+bash scripts/deploy.sh                                                     # first build + publish
 ```
 
-Then in GitHub → repo → Settings → Webhooks → Add webhook:
-Payload URL `https://lillyrosenthal.org/gitwebhook.php`, content type
-`application/json`, Secret = the same `webhook_secret`, event "Just the push
-event". Every push now runs `scripts/deploy.sh` on the server: `git reset
---hard origin/main`, `npm ci`, `npm run build`, then rsync `dist/` into the web
-root (keeping `config.local.php`). The log is
-`/home/lillydebate/lillyrosenthal.org.deploy.log`; GitHub's "Recent
-Deliveries" tab shows the script's output.
+`scripts/deploy.sh` starts by copying `.env` from the secrets directory into
+the checkout (the secrets copy is the master; edit it there). `gitwebhook.php`
+(served from the web root) reads `config.local.php` from the secrets directory.
 
-If the repo, web root or branch differ, set `REPO`, `WEBROOT` or `BRANCH` at the
-top of `scripts/deploy.sh` (or in the environment).
+Then in GitHub → repo → Settings → Webhooks → Add webhook: payload URL
+`https://lillyrosenthal.org/gitwebhook.php`, content type `application/json`,
+Secret = `webhook_secret`, "Just the push event". Every push runs
+`scripts/deploy.sh`: `git reset --hard origin/main`, `npm ci`, `npm run build`,
+rsync `dist/` into the web root. Log: `~/deploy/lillyrosenthal.org.deploy.log`;
+GitHub's "Recent Deliveries" tab shows the script output. Override `REPO`,
+`SECRETS`, `WEBROOT` or `BRANCH` in the environment if your paths differ.
 
 ### Building by hand
 

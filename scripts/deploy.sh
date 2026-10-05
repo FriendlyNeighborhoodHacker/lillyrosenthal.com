@@ -1,34 +1,36 @@
 #!/bin/bash
-# Server-side deploy, run by public/gitwebhook.php on each GitHub push
-# (or by hand: bash scripts/deploy.sh). Pulls the repo, builds, and publishes
-# dist/ into the web root.
-#
-# One-time server setup is in README.md ("Deploying").
+set -e
+
+export HOME="/home/lillydebate"
+export NVM_DIR="/home/lillydebate/.nvm"
+
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+  . "$NVM_DIR/nvm.sh"
+else
+  echo "ERROR: nvm.sh not found at $NVM_DIR/nvm.sh"
+  exit 1
+fi
+
+nvm use 22
+
+echo "Node is: $(which node)"
+echo "Node version: $(node -v)"
+echo "npm is: $(which npm)"
+echo "npm version: $(npm -v)"
 set -euo pipefail
+cd /home/lillydebate/deploy/lillyrosenthal.org
+git fetch --prune
+git reset --hard origin/main
+             
+cp -f /home/lillydebate/deploy/lillyrosenthal.org.secrets/.env .env
+chmod 600 .env
+grep -Eq '^PUBLIC_MEDIA_BASE=https?://' .env || { echo "PUBLIC_MEDIA_BASE not set in secrets .env"; exit 1; }
+    
 
-REPO="${REPO:-/home/lillydebate/lillyrosenthal.com}"        # git checkout, OUTSIDE the web root
-WEBROOT="${WEBROOT:-/home/lillydebate/lillyrosenthal.org}"  # what Apache serves
-BRANCH="${BRANCH:-main}"
-
-# The webhook runs under PHP with a minimal PATH; pick up nvm / a local node if present.
-[ -s "$HOME/.nvm/nvm.sh" ] && . "$HOME/.nvm/nvm.sh" >/dev/null 2>&1 || true
-export PATH="$HOME/.local/bin:/usr/local/bin:$PATH"
-
-echo "== deploy $(date '+%F %T') as $(whoami)"
-command -v node >/dev/null || { echo "node not found in PATH ($PATH)"; exit 1; }
-echo "node $(node -v), npm $(npm -v)"
-
-cd "$REPO"
-[ -f .env ] || { echo "missing $REPO/.env (needs PUBLIC_MEDIA_BASE); copy .env.example"; exit 1; }
-git fetch --quiet origin
-git reset --hard --quiet "origin/$BRANCH"
-echo "at $(git rev-parse --short HEAD): $(git log -1 --pretty=%s)"
-
-npm ci --no-audit --no-fund --silent
+# Optional build steps here (composer install, cache clear, etc.)
 npm run build
-
-mkdir -p "$WEBROOT"
-# --delete keeps the web root identical to dist/, except the webhook's own
-# secret config, which lives only on the server.
-rsync -a --delete --exclude 'config.local.php' dist/ "$WEBROOT"/
-echo "== published to $WEBROOT"
+rm -rf /home/lillydebate/lillyrosenthal.org.old
+if [ -d /home/lillydebate/lillyrosenthal.org ]; then
+  mv /home/lillydebate/lillyrosenthal.org /home/lillydebate/lillyrosenthal.org.old
+fi
+mv /home/lillydebate/deploy/lillyrosenthal.org/dist /home/lillydebate/lillyrosenthal.org
