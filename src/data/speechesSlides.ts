@@ -33,7 +33,7 @@ import { buildSlide, type Slide } from './slides';
  *   }),
  */
 export const speechesSlides: Slide[] = [
-  buildSlide('speeches/MOV_8271', { title: 'Speeches' }),
+  buildSlide('speeches/MOV_8271', { title: 'Student Government Speech' }),
   buildSlide('speeches/01_IMG_8899', { title: 'Speeches' }),
   //buildSlide('speeches/02_b4094358-3c45-4aa4-927d-bebfa2a4e89b', { title: 'Speeches' }),
   //buildSlide('speeches/03_IMG_5230', { title: 'Speeches' }),
