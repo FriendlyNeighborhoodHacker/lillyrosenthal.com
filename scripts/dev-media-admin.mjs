@@ -11,9 +11,11 @@
  * is public.
  */
 import { S3Client, ListObjectsV2Command, PutObjectCommand, DeleteObjectCommand, GetObjectCommand, HeadObjectCommand } from '@aws-sdk/client-s3';
-import { spawnSync } from 'node:child_process';
+import { execFile } from 'node:child_process';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
+import { pipeline } from 'node:stream/promises';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -144,10 +146,18 @@ export default function devMediaAdmin() {
             const [section, ...rest] = rel.split('/');
             if (!section || rest.length !== 1) return json(res, 400, { error: 'Object must be directly inside a section folder' });
             const name = rest[0].slice(0, -ext.length);
-            const port = server.config.server.port || 4321;
-            const local = `http://127.0.0.1:${port}/__media/api/object?key=${encodeURIComponent(key)}`;
-            const probe = spawnSync('ffprobe', ['-v', 'error', '-show_streams', '-show_format', '-of', 'json', local], { encoding: 'utf8', maxBuffer: 16e6 });
-            if (probe.status !== 0) return json(res, 500, { error: `ffprobe failed: ${probe.stderr.trim().split('\n').pop()}` });
+            // Download to a temp file and probe that. (Never probe a URL on this
+            // same dev server: it is single-threaded and would deadlock.)
+            const tmp = path.join(os.tmpdir(), `lr-probe-${Date.now()}${ext}`);
+            let probe;
+            try {
+              const obj = await getClient().send(new GetObjectCommand({ Bucket: bucket(), Key: key }));
+              await pipeline(obj.Body, fs.createWriteStream(tmp));
+              probe = await new Promise((resolve) => execFile('ffprobe', ['-v', 'error', '-show_streams', '-show_format', '-of', 'json', tmp], { maxBuffer: 16e6 }, (err, stdout, stderr) => resolve({ err, stdout, stderr })));
+            } finally {
+              fs.rmSync(tmp, { force: true });
+            }
+            if (probe.err) return json(res, 500, { error: `ffprobe failed: ${String(probe.stderr || probe.err.message).trim().split('\n').pop()}` });
             const info = JSON.parse(probe.stdout);
             const v = (info.streams || []).find((s) => s.codec_type === 'video') || {};
             const head = await getClient().send(new HeadObjectCommand({ Bucket: bucket(), Key: key }));
