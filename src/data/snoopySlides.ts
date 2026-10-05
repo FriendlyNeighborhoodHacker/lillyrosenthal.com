@@ -36,7 +36,7 @@ export const snoopySlides: Slide[] = [
   buildSlide('snoopy/01_IMG_1894_1', { title: 'Snoopy - Supertime, Ending' }),
   buildSlide('snoopy/02_IMG_1863', { title: 'Snoopy - I\'ll Get You, Red Baron' }),
   buildSlide('snoopy/03_IMG_1883', { title: 'Snoopy - You\'re a Good Man, Charlie Brown' }),
-  buildSlide('snoopy/03a_IMG_1894', { title: 'Snoopy - Suppertime"}),
+  buildSlide('snoopy/03a_IMG_1894', { title: 'Snoopy - Suppertime' }),
   buildSlide('snoopy/04_IMG_1884', { title: 'Snoopy - Not Bad At All' }),
   buildSlide('snoopy/05_IMG_1885', { title: 'Snoopy - Today, I\'m a Dog' }),
 ].filter((s): s is Slide => Boolean(s));
