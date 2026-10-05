@@ -26,3 +26,7 @@ public/media/
 
 # jetbrains setting folder
 .idea/
+
+# webhook secret + server paths (lives next to gitwebhook.php on the server)
+config.local.php
+public/config.local.php

@@ -7,11 +7,12 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "node scripts/build.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "import-media": "node scripts/import-media.mjs",
-    "upload-media": "node --env-file-if-exists=.env scripts/upload-media.mjs"
+    "upload-media": "node --env-file-if-exists=.env scripts/upload-media.mjs",
+    "build:raw": "astro build"
   },
   "dependencies": {
     "@astrojs/mdx": "^6.0.3",

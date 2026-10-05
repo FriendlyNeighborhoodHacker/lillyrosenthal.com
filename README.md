@@ -13,6 +13,49 @@ npm run dev            # http://localhost:4321
 npm run build          # static site in dist/
 ```
 
+## Deploying
+
+The site is static. Production is a DreamHost VPS that serves
+`/home/lillydebate/lillyrosenthal.org`; a GitHub webhook makes it rebuild on
+every push. All video comes from the Cloudflare bucket, so the server needs no
+media files and no R2 credentials, only `PUBLIC_MEDIA_BASE`.
+
+### One-time server setup
+
+```sh
+# as the site user, on the VPS (Node >= 22.12 must be on the PATH)
+git clone <repo> /home/lillydebate/lillyrosenthal.com     # the checkout lives OUTSIDE the web root
+cd /home/lillydebate/lillyrosenthal.com
+cp .env.example .env            # set PUBLIC_MEDIA_BASE=https://lillyrosenthalmedia.com
+bash scripts/deploy.sh          # first build + publish into /home/lillydebate/lillyrosenthal.org
+cp public/config.local.php.example /home/lillydebate/lillyrosenthal.org/config.local.php
+# edit that config.local.php: set webhook_secret (any long random string)
+```
+
+Then in GitHub → repo → Settings → Webhooks → Add webhook:
+Payload URL `https://lillyrosenthal.org/gitwebhook.php`, content type
+`application/json`, Secret = the same `webhook_secret`, event "Just the push
+event". Every push now runs `scripts/deploy.sh` on the server: `git reset
+--hard origin/main`, `npm ci`, `npm run build`, then rsync `dist/` into the web
+root (keeping `config.local.php`). The log is
+`/home/lillydebate/lillyrosenthal.org.deploy.log`; GitHub's "Recent
+Deliveries" tab shows the script's output.
+
+If the repo, web root or branch differ, set `REPO`, `WEBROOT` or `BRANCH` at the
+top of `scripts/deploy.sh` (or in the environment).
+
+### Building by hand
+
+```sh
+npm ci
+npm run build          # → dist/ (dist/media is dropped when PUBLIC_MEDIA_BASE is set)
+rsync -av --delete --exclude config.local.php dist/ user@host:/home/lillydebate/lillyrosenthal.org/
+```
+
+The build refuses to run when `PUBLIC_MEDIA_BASE` is blank and there is no
+local `public/media`, since no clip could load. The media admin, the dev badge
+and the clip clock never appear in the build.
+
 ## Media
 
 Source clips live in `~/Dropbox/lilly_college/acting/<section>/` (override with

@@ -1,0 +1,11 @@
+<?php
+// Copy to config.local.php (next to gitwebhook.php in the web root) and fill in.
+// config.local.php is gitignored and must never be committed.
+return [
+    // Same value as the "Secret" field of the GitHub webhook.
+    'webhook_secret' => 'change-me',
+
+    // Script the webhook runs on each push, and where it logs.
+    'deploy_script'  => '/home/lillydebate/lillyrosenthal.com/scripts/deploy.sh',
+    'log_file'       => '/home/lillydebate/lillyrosenthal.org.deploy.log',
+];
