@@ -33,8 +33,8 @@ import { buildSlide, type Slide } from './slides';
  *   }),
  */
 export const gomezSlides: Slide[] = [
-  buildSlide('gomez/01_IMG_1136', { title: 'Gomez' }),
-  buildSlide('gomez/02_IMG_1212', { title: 'Gomez' }),
-  buildSlide('gomez/03_IMG_1232', { title: 'Gomez' }),
-  buildSlide('gomez/04_IMG_1126', { title: 'Gomez' }),
+  buildSlide('gomez/01_IMG_1136', { title: 'Gomez - Full Disclosure' }),
+  buildSlide('gomez/02_IMG_1212', { title: 'Gomez - Summoning Ancestors' }),
+  buildSlide('gomez/03_IMG_1232', { title: 'Gomez - Florida' }),
+  buildSlide('gomez/04_IMG_1126', { title: 'Gomez - Introduction' }),
 ].filter((s): s is Slide => Boolean(s));

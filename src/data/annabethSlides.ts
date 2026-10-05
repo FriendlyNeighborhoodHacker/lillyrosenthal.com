@@ -33,6 +33,6 @@ import { buildSlide, type Slide } from './slides';
  *   }),
  */
 export const annabethSlides: Slide[] = [
-  buildSlide('annabeth/01_IMG_3655', { title: 'Annabeth' }),
-  buildSlide('annabeth/02_IMG_6923', { title: 'Annabeth' }),
+  buildSlide('annabeth/01_IMG_3655', { title: 'Annabeth - I Will Be Remembered' }),
+  buildSlide('annabeth/02_IMG_6923', { title: 'Annabeth - Fighting Scene' }),
 ].filter((s): s is Slide => Boolean(s));
