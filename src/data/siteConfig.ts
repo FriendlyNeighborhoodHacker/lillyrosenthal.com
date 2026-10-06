@@ -74,8 +74,16 @@ export const siteConfig = {
   /** Default color behind letterboxed / pillarboxed media (per-slide: sideColor). */
   backgroundColor: '#000',
 
-  /** Default boxed title colors (per-slide: titleBackground / titleColor). */
-  title: { background: 'white', color: '#222' },
+  /**
+   * Default title colors. `wide` = the floating box on desktop (per-slide:
+   * titleBackground / titleColor). `narrow` = the full-width bar at the bottom
+   * on phones, at or below mobileBarBreakpoint (per-slide: narrowTitleBackground /
+   * narrowTitleColor). Use 'none' as a background for plain text with a glow.
+   */
+  title: {
+    wide: { background: 'white', color: '#222' },
+    narrow: { background: 'black', color: 'white' },
+  },
 
   /** Default header text color over the slideshow (per-slide: menuColor). */
   menuColor: 'white' as 'white' | 'black',

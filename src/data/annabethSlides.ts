@@ -14,8 +14,9 @@ import { buildSlide, type Slide } from './slides';
  *   transition       what happens when LEAVING this slide: { type: 'crossfade' | 'fade' | 'none', duration }
  *                    e.g. { type: 'fade', duration: 1.2 } fades to black then fades the next clip in (default siteConfig.transition)
  *   menuColor        'white' | 'black' header text over this slide
- *   titleBackground  title box color ('none' for text with a glow instead of a box)
- *   titleColor       title text color
+ *   titleBackground  DESKTOP title box color ('none' for text with a glow instead of a box)
+ *   titleColor       DESKTOP title text color
+ *   narrowTitleBackground / narrowTitleColor   the same for the PHONE title bar (default white on black)
  *   sideColor        color behind the clip where it does not fill the stage
  *   shadowColor      glow behind header / un-boxed title text
  *   orientation      'landscape' | 'portrait' (default: from the clip's dimensions)

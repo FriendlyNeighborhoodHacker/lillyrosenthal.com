@@ -55,8 +55,12 @@ export interface Slide {
   narrowShift?: number;
 
   menuColor: 'white' | 'black';
+  /** Desktop title box (wide screens). */
   titleBackground: string;
   titleColor: string;
+  /** Phone title bar (at or below siteConfig.mobileBarBreakpoint). */
+  narrowTitleBackground: string;
+  narrowTitleColor: string;
   sideColor: string;
   shadowColor: string;
 
@@ -67,7 +71,7 @@ export interface Slide {
 
 /** The subset of Slide you may override per clip. */
 export type SlideOverrides = Partial<
-  Pick<Slide, 'title' | 'link' | 'duration' | 'start' | 'end' | 'menuColor' | 'titleBackground' | 'titleColor' | 'sideColor' | 'shadowColor' | 'orientation' | 'narrowShift'>
+  Pick<Slide, 'title' | 'link' | 'duration' | 'start' | 'end' | 'menuColor' | 'titleBackground' | 'titleColor' | 'narrowTitleBackground' | 'narrowTitleColor' | 'sideColor' | 'shadowColor' | 'orientation' | 'narrowShift'>
 > & { wide?: FitRule; narrow?: FitRule; transition?: Partial<Transition> };
 
 interface ManifestClip {
@@ -113,8 +117,10 @@ export function buildSlide(key: string, overrides: SlideOverrides = {}): Slide |
     transition: { ...siteConfig.transition, ...overrides.transition },
     narrowShift: overrides.narrowShift,
     menuColor: overrides.menuColor ?? siteConfig.menuColor,
-    titleBackground: overrides.titleBackground ?? siteConfig.title.background,
-    titleColor: overrides.titleColor ?? siteConfig.title.color,
+    titleBackground: overrides.titleBackground ?? siteConfig.title.wide.background,
+    titleColor: overrides.titleColor ?? siteConfig.title.wide.color,
+    narrowTitleBackground: overrides.narrowTitleBackground ?? siteConfig.title.narrow.background,
+    narrowTitleColor: overrides.narrowTitleColor ?? siteConfig.title.narrow.color,
     sideColor: overrides.sideColor ?? siteConfig.backgroundColor,
     shadowColor: overrides.shadowColor ?? siteConfig.shadowColor,
     wide: { ...siteConfig.display.wide[orientation], ...overrides.wide },

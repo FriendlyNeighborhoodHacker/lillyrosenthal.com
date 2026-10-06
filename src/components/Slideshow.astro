@@ -29,6 +29,7 @@ const isDev = import.meta.env.DEV;
 const showClock = siteConfig.showClock === 'always' || (siteConfig.showClock === 'dev' && isDev);
 
 const boxed = (s?: Slide) => Boolean(s && s.titleBackground && s.titleBackground !== 'none');
+// Server render uses the desktop colors; the script re-applies per viewport.
 const titleStyle = (s?: Slide) => (boxed(s) ? `--title-bg: ${s!.titleBackground}; --title-color: ${s!.titleColor};` : '');
 
 // Breakpoint-dependent rules live here (not in global.css) so siteConfig is
@@ -61,6 +62,7 @@ const inlineCss = `
     data-dev={isDev ? 'true' : 'false'}
     data-clock={showClock ? 'true' : 'false'}
     data-smart-start={smartStart ? 'true' : 'false'}
+    data-bar-breakpoint={barBp}
     data-seen-key={siteConfig.seenStorageKey}
     data-seen-after={siteConfig.seenAfterSeconds}
     data-seen-window={siteConfig.seenWindowMinutes}
@@ -77,6 +79,8 @@ const inlineCss = `
         data-title={slide.title || ''}
         data-title-bg={boxed(slide) ? slide.titleBackground : ''}
         data-title-color={slide.titleColor}
+        data-title-bg-narrow={slide.narrowTitleBackground && slide.narrowTitleBackground !== 'none' ? slide.narrowTitleBackground : ''}
+        data-title-color-narrow={slide.narrowTitleColor}
         data-duration={slide.duration ?? ''}
         data-start={slide.start ?? ''}
         data-end={slide.end ?? ''}
@@ -228,6 +232,7 @@ const inlineCss = `
     const soundHint = document.getElementById('sound-hint') as HTMLElement | null;
     const playBtn = document.getElementById('play-toggle') as HTMLButtonElement;
     const wideMQ = window.matchMedia(`(min-width: ${cfg.breakpoint}px)`);
+    const barMQ = window.matchMedia(`(max-width: ${Number(showEl.dataset.barBreakpoint) || 800}px)`);  // phone title bar
 
     let current = 0;
     let imageTimer: number | undefined;
@@ -310,6 +315,7 @@ const inlineCss = `
     window.addEventListener('resize', layoutAll);
     window.addEventListener('orientationchange', () => setTimeout(layoutAll, 50));
     wideMQ.addEventListener?.('change', layoutAll);
+    barMQ.addEventListener?.('change', () => updateChrome());
 
     /* ------------------------------------------------------------ chrome */
     function updateChrome() {
@@ -338,11 +344,14 @@ const inlineCss = `
         titleText.textContent = title;
         titleCount.textContent = cfg.showCounter && slides.length > 1 ? `· ${current + 1} / ${slides.length}` : '';
         titleEl.hidden = !title && !titleCount.textContent;
-        const bg = el.dataset.titleBg || '';
+        // Phone bar vs desktop box: each has its own colors.
+        const narrowBar = barMQ.matches;
+        const bg = (narrowBar ? el.dataset.titleBgNarrow : el.dataset.titleBg) || '';
+        const fg = (narrowBar ? el.dataset.titleColorNarrow : el.dataset.titleColor) || '#fff';
         if (bg) {
           titleEl.classList.add('boxed');
           titleEl.style.setProperty('--title-bg', bg);
-          titleEl.style.setProperty('--title-color', el.dataset.titleColor || '#fff');
+          titleEl.style.setProperty('--title-color', fg);
           titleEl.style.textShadow = '';
         } else {
           titleEl.classList.remove('boxed');

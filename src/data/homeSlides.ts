@@ -21,8 +21,8 @@ const crossfade = { type: 'crossfade', duration: 1.5 } as const;
  */
 const look = {
   menuColor: 'white',                   // header text over the slide: 'white' | 'black'
-  titleBackground: 'white',             // title box color ('none' = plain text with a glow)
-  titleColor: '#222',                   // title text color
+  narrowTitleBackground: 'black',       // PHONE title bar color (the full-width bar at the bottom)
+  narrowTitleColor: 'white',            // PHONE title bar text color
   sideColor: '#000',                    // color behind the media where it does not fill the stage
   shadowColor: 'rgba(0, 0, 0, 0.75)',   // glow behind header text / un-boxed titles
   transition: crossfade,                // what happens when leaving the slide
@@ -36,6 +36,7 @@ export const homeSlides: Slide[] = [
   //buildSlide('gomez/01_IMG_1136', { title: 'Gomez', link: '/gomez/', start: 13 }),
   buildSlide('gomez/01_IMG_1136', {
     ...look, title: 'Addams Family / Gomez (2026)', link: '/gomez/', end: 20.5,
+
     // Landscape clip on a phone: zoom in instead of letterboxing. scale 1 = full
     // width with bars; ~1.8 = smaller bars, sides cropped; fit: 'cover' = fills the
     // screen. centerX/centerY = the point of the frame kept at screen center
@@ -44,7 +45,8 @@ export const homeSlides: Slide[] = [
     // On phones, show this one second (swap with the next slide); desktop keeps this order.
     narrowShift: 1,
   }),
-  buildSlide('annabeth/01_IMG_3655', { ...look, title: 'Percy Jackson / Annabeth (2025)', link: '/annabeth/', start: 11, end: 40 }),
+  buildSlide('annabeth/01_IMG_3655', { ...look, title: 'Percy Jackson / Annabeth (2025)', link: '/annabeth/', start: 11, end: 40, 
+  }),
   buildSlide('snoopy/01_IMG_1894_1', { ...look, title: 'You\'re a Good Man Charlie Brown / Snoopy (2024)', link: '/snoopy/',
     // Landscape clip on a phone: zoom in instead of letterboxing. scale 1 = full
     // width with bars; ~1.8 = smaller bars, sides cropped; fit: 'cover' = fills the

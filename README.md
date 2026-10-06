@@ -125,7 +125,7 @@ is only the local working copy.
 
 | File | What it controls |
 | --- | --- |
-| `src/data/siteConfig.ts` | Breakpoints, stage height, image duration, default fit rules per viewport × orientation, default colors, counter, localStorage keys. `mediaBase` is read from `PUBLIC_MEDIA_BASE` in `.env`. |
+| `src/data/siteConfig.ts` | Breakpoints, stage height, image duration, default fit rules per viewport × orientation, default colors (desktop title box black-on-white, phone title bar white-on-black, each overridable per slide with `titleBackground`/`titleColor` and `narrowTitleBackground`/`narrowTitleColor`), counter, localStorage keys. `mediaBase` is read from `PUBLIC_MEDIA_BASE` in `.env`. |
 | `src/data/homeSlides.ts` | Which clips are on the homepage, in order, with title + link + any options. |
 | `src/data/snoopySlides.ts`, `annabethSlides.ts`, `gomezSlides.ts`, `speechesSlides.ts` | Each section page's clips, in order, with per-slide options (title, colors, fit rules). The option list is documented at the top of each file. |
 | `src/data/sections.ts` | Maps section slugs to those slide files. |
