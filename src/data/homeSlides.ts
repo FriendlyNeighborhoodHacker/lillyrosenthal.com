@@ -54,7 +54,7 @@ export const homeSlides: Slide[] = [
     // (shift+click the video in dev, with the window < 1000px wide, to get them).
     narrow: { fit: 'contain', scale: 1.8, centerX: 50, centerY: 45 },
   }),
-  buildSlide('speeches/MOV_8271', { ...look, title: 'Student Council Speech', link: '/speeches/', start: 3 }),
+  buildSlide('speeches/MOV_8271', { ...look, title: 'Speech / VP Student Government', link: '/speeches/', start: 3 }),
   buildSlide('speeches/01_IMG_8899', { ...look, title: 'Annie / Little Girls', link: '/speeches/', start: 3 }),
 
   // ---- stills (each stays `stillSeconds`)
