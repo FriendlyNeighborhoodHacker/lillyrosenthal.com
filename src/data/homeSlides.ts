@@ -59,13 +59,13 @@ export const homeSlides: Slide[] = [
 
   // ---- stills (each stays `stillSeconds`)
   buildSlide('stills/annabeth_fighting', { ...look, title: 'Percy Jackson / Annabeth', link: '/annabeth/', duration: stillSeconds }),
+  buildSlide('stills/jumping', { ...look, title: 'You\'re a Good Man Charlie Brown / Snoopy', link: '/snoopy/', duration: stillSeconds,
+    narrow: { fit: 'contain', scale: 1.8, centerX: 50, centerY: 45 },
+  }),
   buildSlide('stills/gomez_dipping', { ...look, title: 'Addams Fmaily / Gomez', link: '/gomez/', duration: stillSeconds,
     narrow: { fit: 'contain', scale: 1.8, centerX: 50, centerY: 45 },
   }),
   buildSlide('stills/gomez_waving_cape', { ...look, title: 'Addams Fmaily / Gomez', link: '/gomez/', duration: stillSeconds}),
-  buildSlide('stills/jumping', { ...look, title: 'You\'re a Good Man Charlie Brown / Snoopy', link: '/snoopy/', duration: stillSeconds,
-    narrow: { fit: 'contain', scale: 1.8, centerX: 50, centerY: 45 },
-  }),
   buildSlide('stills/lilly_as_annabeth', { ...look, title: 'Percy Jackson / Annabeth', link: '/annabeth/', duration: stillSeconds }),
   //buildSlide('stills/annabeth_still1', { ...look, title: 'Percy Jackson / Annabeth', link: '/annabeth/', duration: stillSeconds }),
   //buildSlide('stills/kicking', { ...look, title: 'Addams Family / Gomez', link: '/gomez/', duration: stillSeconds }),
