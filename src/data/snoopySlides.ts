@@ -45,7 +45,7 @@ export const snoopySlides: Slide[] = [
     narrow: { fit: 'contain', scale: 2.2, centerX: 50, centerY: 45 },
   }),
   buildSlide('snoopy/03a_IMG_1894', { title: 'Snoopy - Suppertime',
-    narrow: { fit: 'contain', scale: 1.8, centerX: 50, centerY: 45 },
+    narrow: { fit: 'contain', scale: 1.5, centerX: 50, centerY: 45 },
   }),
   buildSlide('snoopy/04_IMG_1884', { title: 'Snoopy - Not Bad At All',
     narrow: { fit: 'contain', scale: 2.2, centerX: 50, centerY: 45 },

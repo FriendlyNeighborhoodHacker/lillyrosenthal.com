@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T19:04:24.254Z",
+  "generatedAt": "2026-10-06T13:58:27.251Z",
   "clips": {
     "annabeth/01_IMG_3655": {
       "section": "annabeth",
@@ -171,6 +171,14 @@
       "duration": 78.72,
       "bytes": 12854060
     },
+    "stills/annabeth_fighting": {
+      "section": "stills",
+      "type": "image",
+      "src": "/media/stills/annabeth_fighting.jpg",
+      "width": 1069,
+      "height": 1280,
+      "bytes": 413673
+    },
     "stills/annabeth_still1": {
       "section": "stills",
       "type": "image",
@@ -178,6 +186,22 @@
       "width": 404,
       "height": 720,
       "bytes": 92109
+    },
+    "stills/gomez_dipping": {
+      "section": "stills",
+      "type": "image",
+      "src": "/media/stills/gomez_dipping.jpg",
+      "width": 1280,
+      "height": 960,
+      "bytes": 641655
+    },
+    "stills/gomez_waving_cape": {
+      "section": "stills",
+      "type": "image",
+      "src": "/media/stills/gomez_waving_cape.jpg",
+      "width": 1025,
+      "height": 1280,
+      "bytes": 351812
     },
     "stills/jumping": {
       "section": "stills",
