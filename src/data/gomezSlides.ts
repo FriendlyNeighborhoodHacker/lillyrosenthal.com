@@ -35,7 +35,7 @@ import { buildSlide, type Slide } from './slides';
  *     narrow: { fit: 'cover', centerX: 40, centerY: 25 },
  *   }),
  */
-const stillSeconds = 6;
+const stillSeconds = 4;
 export const gomezSlides: Slide[] = [
   buildSlide('gomez/01_IMG_1136', { title: 'Gomez - Full Disclosure',
     title: 'Addams Family / Gomez (2026)', link: '/gomez/',

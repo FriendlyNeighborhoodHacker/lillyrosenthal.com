@@ -35,7 +35,7 @@ import { buildSlide, type Slide } from './slides';
  *     narrow: { fit: 'cover', centerX: 40, centerY: 25 },
  *   }),
  */
-const stillSeconds = 6;
+const stillSeconds = 4;
 export const annabethSlides: Slide[] = [
   buildSlide('annabeth/01_IMG_3655', { title: 'Annabeth - I Will Be Remembered' }),
   buildSlide('annabeth/02_IMG_6923', { title: 'Annabeth - Fighting Scene',

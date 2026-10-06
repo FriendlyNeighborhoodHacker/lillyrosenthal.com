@@ -29,7 +29,7 @@ const look = {
 } as const;
 
 /** Stills stay this many seconds (siteConfig.imageDuration is 6). */
-const stillSeconds = 6;
+const stillSeconds = 4;
 
 export const homeSlides: Slide[] = [
   // ---- videos
