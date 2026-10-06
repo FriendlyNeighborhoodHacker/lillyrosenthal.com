@@ -34,7 +34,7 @@ const stillSeconds = 6;
 export const homeSlides: Slide[] = [
   // ---- videos
   //buildSlide('gomez/01_IMG_1136', { title: 'Gomez', link: '/gomez/', start: 13 }),
-  buildSlide('gomez/01_IMG_1136', { ...look, title: 'Addams Family / Gomez (2026)', link: '/gomez/', end: 22.5 }),
+  buildSlide('gomez/01_IMG_1136', { ...look, title: 'Addams Family / Gomez (2026)', link: '/gomez/', end: 20.5 }),
   buildSlide('annabeth/01_IMG_3655', { ...look, title: 'Percy Jackson / Annabeth (2025)', link: '/annabeth/', start: 11, end: 40 }),
   buildSlide('snoopy/01_IMG_1894_1', { ...look, title: 'You\'re a Good Man Charlie Brown / Snoopy (2024)', link: '/snoopy/' }),
   buildSlide('speeches/01_IMG_8899', { ...look, title: 'Annie / Little Girls', link: '/speeches/', start: 3 }),

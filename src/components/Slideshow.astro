@@ -211,6 +211,7 @@ const inlineCss = `
     let wasDrag = false;
     let userPaused = false;        // the visitor pressed pause
     let soundBlocked = false;      // sound is "on" but the browser refused unmuted autoplay
+    let soundEverPlayed = false;   // an unmuted play() has succeeded on this page
     let soundOn = false;
     try { soundOn = localStorage.getItem(cfg.soundKey) === 'on'; } catch { /* private mode etc. */ }
 
@@ -470,10 +471,19 @@ const inlineCss = `
       v.muted = !soundOn;
       try {
         await v.play();
-        if (soundOn) soundBlocked = false;
-      } catch {
+        if (soundOn) { soundBlocked = false; if (!v.muted) soundEverPlayed = true; }
+      } catch (err) {
+        const e = err as DOMException;
+        console.warn('[slideshow] play() rejected:', e?.name, e?.message, '| sound on:', soundOn, '| muted:', v.muted, '| slide:', el.dataset.key, '| sound played before:', soundEverPlayed);
+        // Retry once shortly if this is not a policy refusal (e.g. an AbortError from a
+        // load/seek race), or if sound was already playing on this page (a refusal then
+        // is unexpected and often transient).
+        if (videoOf(slides[current]) === v && (e?.name !== 'NotAllowedError' || (soundOn && soundEverPlayed))) {
+          await new Promise((r) => setTimeout(r, 300));
+          try { await v.play(); updateControls(); return; } catch (err2) { console.warn('[slideshow] retry rejected:', (err2 as DOMException)?.name); }
+        }
         if (soundOn && !v.muted) {
-          // Unmuted autoplay refused: play muted, show the muted icon, keep the preference.
+          // Unmuted autoplay refused by the browser: play muted, show the pending icon, keep the preference.
           soundBlocked = true;
           v.muted = true;
           armUnmuteOnGesture();
