@@ -19,6 +19,8 @@ import { buildSlide, type Slide } from './slides';
  *   sideColor        color behind the clip where it does not fill the stage
  *   shadowColor      glow behind header / un-boxed title text
  *   orientation      'landscape' | 'portrait' (default: from the clip's dimensions)
+ *   narrowShift      on phones / narrow screens move this slide N positions later (negative = earlier);
+ *                    e.g. narrowShift: 1 on the first slide swaps it with the second there
  *   wide / narrow    fit rule for viewports >= / < siteConfig.breakpoint:
  *                      { fit: 'cover'|'contain'|'height'|'width', scale, centerX, centerY, alignX, alignY }
  *                    (merged over siteConfig.display defaults; see README "Fit rules")
@@ -34,5 +36,7 @@ import { buildSlide, type Slide } from './slides';
  */
 export const annabethSlides: Slide[] = [
   buildSlide('annabeth/01_IMG_3655', { title: 'Annabeth - I Will Be Remembered' }),
-  buildSlide('annabeth/02_IMG_6923', { title: 'Annabeth - Fighting Scene' }),
+  buildSlide('annabeth/02_IMG_6923', { title: 'Annabeth - Fighting Scene',
+    narrow: { fit: 'contain', scale: 1.8, centerX: 50, centerY: 45 },
+  }),
 ].filter((s): s is Slide => Boolean(s));

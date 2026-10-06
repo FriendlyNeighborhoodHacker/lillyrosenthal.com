@@ -47,6 +47,12 @@ export interface Slide {
   end?: number;
   /** Transition used when leaving this slide. */
   transition: Transition;
+  /**
+   * On narrow screens (below siteConfig.breakpoint) move this slide this many
+   * positions later (negative = earlier). Wide screens keep the file order.
+   * e.g. narrowShift: 1 on the first slide swaps it with the second on phones.
+   */
+  narrowShift?: number;
 
   menuColor: 'white' | 'black';
   titleBackground: string;
@@ -61,7 +67,7 @@ export interface Slide {
 
 /** The subset of Slide you may override per clip. */
 export type SlideOverrides = Partial<
-  Pick<Slide, 'title' | 'link' | 'duration' | 'start' | 'end' | 'menuColor' | 'titleBackground' | 'titleColor' | 'sideColor' | 'shadowColor' | 'orientation'>
+  Pick<Slide, 'title' | 'link' | 'duration' | 'start' | 'end' | 'menuColor' | 'titleBackground' | 'titleColor' | 'sideColor' | 'shadowColor' | 'orientation' | 'narrowShift'>
 > & { wide?: FitRule; narrow?: FitRule; transition?: Partial<Transition> };
 
 interface ManifestClip {
@@ -105,6 +111,7 @@ export function buildSlide(key: string, overrides: SlideOverrides = {}): Slide |
     start: overrides.start,
     end: overrides.end,
     transition: { ...siteConfig.transition, ...overrides.transition },
+    narrowShift: overrides.narrowShift,
     menuColor: overrides.menuColor ?? siteConfig.menuColor,
     titleBackground: overrides.titleBackground ?? siteConfig.title.background,
     titleColor: overrides.titleColor ?? siteConfig.title.color,

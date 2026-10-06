@@ -81,6 +81,7 @@ const inlineCss = `
         data-start={slide.start ?? ''}
         data-end={slide.end ?? ''}
         data-transition={JSON.stringify(slide.transition)}
+        data-narrow-shift={slide.narrowShift ?? ''}
         data-width={slide.width}
         data-height={slide.height}
         data-fit={JSON.stringify({ wide: slide.wide, narrow: slide.narrow })}
@@ -165,6 +166,29 @@ const inlineCss = `
     if (!showEl) return;
     const slides = Array.from(showEl.querySelectorAll<HTMLElement>('.slide'));
     if (!slides.length) return;
+
+    /* narrowShift: on narrow screens, reorder slides before anything else runs.
+       Each shifted slide moves (in file order) by its offset, clamped to the ends. */
+    if (!window.matchMedia(`(min-width: ${Number(showEl.dataset.breakpoint) || 1000}px)`).matches) {
+      const order = slides.slice();
+      let changed = false;
+      for (const el of slides) {
+        const shift = Math.trunc(Number(el.dataset.narrowShift) || 0);
+        if (!shift) continue;
+        const from = order.indexOf(el);
+        const to = Math.min(Math.max(from + shift, 0), order.length - 1);
+        if (to === from) continue;
+        order.splice(from, 1);
+        order.splice(to, 0, el);
+        changed = true;
+      }
+      if (changed) {
+        const anchor = slides[slides.length - 1].nextSibling;   // keep slides ahead of the overlay/controls
+        order.forEach((el) => showEl.insertBefore(el, anchor));
+        slides.splice(0, slides.length, ...order);
+        slides.forEach((el, i) => el.classList.toggle('active', i === 0));
+      }
+    }
 
     const cfg = {
       breakpoint: Number(showEl.dataset.breakpoint) || 1000,

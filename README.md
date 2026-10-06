@@ -140,6 +140,7 @@ Each slide resolves a `wide` (≥ 1000px) and a `narrow` rule:
 - `scale`: zoom after fitting (`1.2` = 20% closer).
 - `centerX`, `centerY` (0–100): the point of the media kept at the center of the stage when it overflows. Clamped so no gap shows. `centerY: 0` keeps the top visible.
 - `alignX`, `alignY`: where the media sits when it is smaller than the stage (where the bars go).
+- `narrowShift` (per slide, not part of the fit rule): on narrow screens move the slide N positions later, or earlier if negative. `narrowShift: 1` on the first slide swaps it with the second on phones; desktop keeps the file order.
 
 In `npm run dev`, **shift+click** anywhere on the slideshow logs and copies the
 `centerX`/`centerY` of that spot for the current clip and viewport, ready to

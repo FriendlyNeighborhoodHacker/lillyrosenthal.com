@@ -34,11 +34,26 @@ const stillSeconds = 6;
 export const homeSlides: Slide[] = [
   // ---- videos
   //buildSlide('gomez/01_IMG_1136', { title: 'Gomez', link: '/gomez/', start: 13 }),
-  buildSlide('gomez/01_IMG_1136', { ...look, title: 'Addams Family / Gomez (2026)', link: '/gomez/', end: 20.5 }),
+  buildSlide('gomez/01_IMG_1136', {
+    ...look, title: 'Addams Family / Gomez (2026)', link: '/gomez/', end: 20.5,
+    // Landscape clip on a phone: zoom in instead of letterboxing. scale 1 = full
+    // width with bars; ~1.8 = smaller bars, sides cropped; fit: 'cover' = fills the
+    // screen. centerX/centerY = the point of the frame kept at screen center
+    // (shift+click the video in dev, with the window < 1000px wide, to get them).
+    narrow: { fit: 'contain', scale: 2.8, centerX: 50, centerY: 45 },
+    // On phones, show this one second (swap with the next slide); desktop keeps this order.
+    narrowShift: 1,
+  }),
   buildSlide('annabeth/01_IMG_3655', { ...look, title: 'Percy Jackson / Annabeth (2025)', link: '/annabeth/', start: 11, end: 40 }),
-  buildSlide('snoopy/01_IMG_1894_1', { ...look, title: 'You\'re a Good Man Charlie Brown / Snoopy (2024)', link: '/snoopy/' }),
-  buildSlide('speeches/01_IMG_8899', { ...look, title: 'Annie / Little Girls', link: '/speeches/', start: 3 }),
+  buildSlide('snoopy/01_IMG_1894_1', { ...look, title: 'You\'re a Good Man Charlie Brown / Snoopy (2024)', link: '/snoopy/',
+    // Landscape clip on a phone: zoom in instead of letterboxing. scale 1 = full
+    // width with bars; ~1.8 = smaller bars, sides cropped; fit: 'cover' = fills the
+    // screen. centerX/centerY = the point of the frame kept at screen center
+    // (shift+click the video in dev, with the window < 1000px wide, to get them).
+    narrow: { fit: 'contain', scale: 1.8, centerX: 50, centerY: 45 },
+  }),
   buildSlide('speeches/MOV_8271', { ...look, title: 'Student Council Speech', link: '/speeches/', start: 3 }),
+  buildSlide('speeches/01_IMG_8899', { ...look, title: 'Annie / Little Girls', link: '/speeches/', start: 3 }),
 
   // ---- stills (each stays `stillSeconds`)
   //buildSlide('stills/jumping', { ...look, title: 'You\'re a Good Man Charlie Brown / Snoopy', link: '/snoopy/', duration: stillSeconds }),

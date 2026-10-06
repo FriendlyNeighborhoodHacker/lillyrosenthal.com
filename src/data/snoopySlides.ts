@@ -19,6 +19,8 @@ import { buildSlide, type Slide } from './slides';
  *   sideColor        color behind the clip where it does not fill the stage
  *   shadowColor      glow behind header / un-boxed title text
  *   orientation      'landscape' | 'portrait' (default: from the clip's dimensions)
+ *   narrowShift      on phones / narrow screens move this slide N positions later (negative = earlier);
+ *                    e.g. narrowShift: 1 on the first slide swaps it with the second there
  *   wide / narrow    fit rule for viewports >= / < siteConfig.breakpoint:
  *                      { fit: 'cover'|'contain'|'height'|'width', scale, centerX, centerY, alignX, alignY }
  *                    (merged over siteConfig.display defaults; see README "Fit rules")
@@ -33,10 +35,22 @@ import { buildSlide, type Slide } from './slides';
  *   }),
  */
 export const snoopySlides: Slide[] = [
-  buildSlide('snoopy/01_IMG_1894_1', { title: 'Snoopy - Supertime, Ending' }),
-  buildSlide('snoopy/02_IMG_1863', { title: 'Snoopy - I\'ll Get You, Red Baron' }),
-  buildSlide('snoopy/03_IMG_1883', { title: 'Snoopy - You\'re a Good Man, Charlie Brown' }),
-  buildSlide('snoopy/03a_IMG_1894', { title: 'Snoopy - Suppertime' }),
-  buildSlide('snoopy/04_IMG_1884', { title: 'Snoopy - Not Bad At All' }),
-  buildSlide('snoopy/05_IMG_1885', { title: 'Snoopy - Today, I\'m a Dog' }),
+  buildSlide('snoopy/01_IMG_1894_1', { title: 'Snoopy - Supertime, Ending',
+    narrow: { fit: 'contain', scale: 2.2, centerX: 50, centerY: 45 },
+  }),
+  buildSlide('snoopy/02_IMG_1863', { title: 'Snoopy - I\'ll Get You, Red Baron',
+    narrow: { fit: 'contain', scale: 2.2, centerX: 45, centerY: 45 },
+  }),
+  buildSlide('snoopy/03_IMG_1883', { title: 'Snoopy - You\'re a Good Man, Charlie Brown',
+    narrow: { fit: 'contain', scale: 2.2, centerX: 50, centerY: 45 },
+  }),
+  buildSlide('snoopy/03a_IMG_1894', { title: 'Snoopy - Suppertime',
+    narrow: { fit: 'contain', scale: 1.8, centerX: 50, centerY: 45 },
+  }),
+  buildSlide('snoopy/04_IMG_1884', { title: 'Snoopy - Not Bad At All',
+    narrow: { fit: 'contain', scale: 2.2, centerX: 50, centerY: 45 },
+  }),
+  buildSlide('snoopy/05_IMG_1885', { title: 'Snoopy - Today, I\'m a Dog',
+    narrow: { fit: 'contain', scale: 2.2, centerX: 50, centerY: 45 },
+  }),
 ].filter((s): s is Slide => Boolean(s));
