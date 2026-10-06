@@ -34,6 +34,7 @@ import { buildSlide, type Slide } from './slides';
  *     narrow: { fit: 'cover', centerX: 40, centerY: 25 },
  *   }),
  */
+const stillSeconds = 6;
 export const snoopySlides: Slide[] = [
   buildSlide('snoopy/01_IMG_1894_1', { title: 'Snoopy - Supertime, Ending',
     narrow: { fit: 'contain', scale: 2.2, centerX: 50, centerY: 45 },
@@ -52,5 +53,8 @@ export const snoopySlides: Slide[] = [
   }),
   buildSlide('snoopy/05_IMG_1885', { title: 'Snoopy - Today, I\'m a Dog',
     narrow: { fit: 'contain', scale: 2.2, centerX: 50, centerY: 45 },
+  }),
+  buildSlide('stills/jumping', { title: 'You\'re a Good Man Charlie Brown / Snoopy', link: '/snoopy/', 
+    narrow: { fit: 'contain', scale: 1.8, centerX: 50, centerY: 45 },
   }),
 ].filter((s): s is Slide => Boolean(s));

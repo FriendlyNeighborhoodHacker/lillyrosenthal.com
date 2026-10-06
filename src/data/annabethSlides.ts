@@ -34,9 +34,14 @@ import { buildSlide, type Slide } from './slides';
  *     narrow: { fit: 'cover', centerX: 40, centerY: 25 },
  *   }),
  */
+const stillSeconds = 6;
 export const annabethSlides: Slide[] = [
   buildSlide('annabeth/01_IMG_3655', { title: 'Annabeth - I Will Be Remembered' }),
   buildSlide('annabeth/02_IMG_6923', { title: 'Annabeth - Fighting Scene',
     narrow: { fit: 'contain', scale: 1.8, centerX: 50, centerY: 45 },
   }),
+  // ---- stills (each stays `stillSeconds`)
+  buildSlide('stills/annabeth_fighting', { title: 'Percy Jackson / Annabeth', link: '/annabeth/', duration: stillSeconds }),
+  buildSlide('stills/lilly_as_annabeth', { title: 'Percy Jackson / Annabeth', link: '/annabeth/', duration: stillSeconds }),
+
 ].filter((s): s is Slide => Boolean(s));

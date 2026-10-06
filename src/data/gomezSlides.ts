@@ -34,6 +34,7 @@ import { buildSlide, type Slide } from './slides';
  *     narrow: { fit: 'cover', centerX: 40, centerY: 25 },
  *   }),
  */
+const stillSeconds = 6;
 export const gomezSlides: Slide[] = [
   buildSlide('gomez/01_IMG_1136', { title: 'Gomez - Full Disclosure',
     title: 'Addams Family / Gomez (2026)', link: '/gomez/',
@@ -59,4 +60,8 @@ export const gomezSlides: Slide[] = [
     // (shift+click the video in dev, with the window < 1000px wide, to get them).
     narrow: { fit: 'contain', scale: 2.8, centerX: 50, centerY: 45 },
   }),
+  buildSlide('stills/gomez_dipping', { title: 'Addams Fmaily / Gomez', link: '/gomez/', duration: stillSeconds,
+    narrow: { fit: 'contain', scale: 1.8, centerX: 50, centerY: 45 },
+  }),
+  buildSlide('stills/gomez_waving_cape', { title: 'Addams Fmaily / Gomez', link: '/gomez/', duration: stillSeconds}),
 ].filter((s): s is Slide => Boolean(s));
