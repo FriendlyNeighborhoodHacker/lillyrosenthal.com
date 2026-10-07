@@ -37,7 +37,7 @@ import { buildSlide, type Slide } from './slides';
  */
 const stillSeconds = 4;
 export const snoopySlides: Slide[] = [
-  buildSlide('snoopy/01_IMG_1894_1', { title: 'Snoopy - Supertime, Ending',
+  buildSlide('snoopy/01_IMG_1894_1', { title: 'Snoopy - Suppertime, Ending',
     narrow: { fit: 'contain', scale: 2.2, centerX: 50, centerY: 45 },
   }),
   buildSlide('snoopy/02_IMG_1863', { title: 'Snoopy - I\'ll Get You, Red Baron',
