@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-06T13:58:27.251Z",
+  "generatedAt": "2026-10-10T23:23:50.214Z",
   "clips": {
     "annabeth/01_IMG_3655": {
       "section": "annabeth",
@@ -160,6 +160,16 @@
       "height": 946,
       "duration": 78.37,
       "bytes": 9765020
+    },
+    "speeches/eighth_grade_speech": {
+      "section": "speeches",
+      "type": "video",
+      "src": "/media/speeches/eighth_grade_speech.mp4",
+      "poster": "/media/speeches/eighth_grade_speech.poster.jpg",
+      "width": 1280,
+      "height": 720,
+      "duration": 102.31,
+      "bytes": 78248040
     },
     "speeches/MOV_8271": {
       "section": "speeches",

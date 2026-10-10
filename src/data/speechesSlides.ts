@@ -47,4 +47,5 @@ export const speechesSlides: Slide[] = [
     // (shift+click the video in dev, with the window < 1000px wide, to get them).
     narrow: { fit: 'contain', scale: 2.8, centerX: 45, centerY: 45 },
   }),
+  buildSlide('speeches/eighth_grade_speech', { title: 'Eighth Grade Speech' }),
 ].filter((s): s is Slide => Boolean(s));
