@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-14T19:12:04.363Z",
+  "generatedAt": "2026-10-14T19:13:29.638Z",
   "clips": {
     "annabeth/01_IMG_3655": {
       "section": "annabeth",
@@ -61,15 +61,25 @@
       "duration": 20.72,
       "bytes": 5407951
     },
-    "gomez/05_Florida": {
+    "gomez/05_Florida2": {
       "section": "gomez",
       "type": "video",
-      "src": "/media/gomez/05_Florida.mp4",
-      "poster": "/media/gomez/05_Florida.poster.jpg",
+      "src": "/media/gomez/05_Florida2.mp4",
+      "poster": "/media/gomez/05_Florida2.poster.jpg",
       "width": 1080,
       "height": 1920,
       "duration": 56.53,
       "bytes": 27918955
+    },
+    "gomez/06_extremely_normal_home": {
+      "section": "gomez",
+      "type": "video",
+      "src": "/media/gomez/06_extremely_normal_home.mp4",
+      "poster": "/media/gomez/06_extremely_normal_home.poster.jpg",
+      "width": 1080,
+      "height": 1920,
+      "duration": 37,
+      "bytes": 19541749
     },
     "snoopy/01_IMG_1894_1": {
       "section": "snoopy",

@@ -61,14 +61,14 @@ export const gomezSlides: Slide[] = [
     transition: { type: 'fade', duration: 0 },
     narrowShift: 2,
   }),
-  buildSlide('gomez/05_Florida', { title: 'Gomez - Florida',
+  buildSlide('gomez/05_Florida2', { title: 'Gomez - Florida',
     // Landscape clip on a phone: zoom in instead of letterboxing. scale 1 = full
     // width with bars; ~1.8 = smaller bars, sides cropped; fit: 'cover' = fills the
     // screen. centerX/centerY = the point of the frame kept at screen center
     // (shift+click the video in dev, with the window < 1000px wide, to get them).
     narrow: { fit: 'contain', scale: 1.6, centerX: 50, centerY: 45 },
   }),
-  //buildSlide('gomez/06_Extremely_Normal_Home', { title: 'Gomez - Extremely Normal Home',
+  //buildSlide('gomez/06_extremely_normal_home', { title: 'Gomez - Extremely Normal Home',
     // Landscape clip on a phone: zoom in instead of letterboxing. scale 1 = full
     // width with bars; ~1.8 = smaller bars, sides cropped; fit: 'cover' = fills the
     // screen. centerX/centerY = the point of the frame kept at screen center
