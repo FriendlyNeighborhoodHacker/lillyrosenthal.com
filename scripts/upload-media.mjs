@@ -116,11 +116,15 @@ if (publicBase) {
   console.log(`\nPublic URLs look like: ${publicBase}/${PREFIX}snoopy/01_IMG_1894_1.mp4`);
   if (check && !dryRun) {
     console.log('Checking public access…');
+    // Probe with a throwaway query string so the check reaches the origin.
+    // A plain request for a brand-new object can arrive before the custom
+    // domain sees it, and Cloudflare then caches that 404 for hours (the
+    // zone's edge TTL), breaking the real URL until it is purged.
     let bad = 0;
     for (const file of files) {
       const url = `${publicBase}/${PREFIX}${path.relative(LOCAL, file).split(path.sep).join('/')}`;
       try {
-        const res = await fetch(url, { method: 'HEAD' });
+        const res = await fetch(`${url}?check=${Date.now()}`, { method: 'HEAD' });
         if (!res.ok) { bad++; console.log(`  ✗ ${res.status} ${url}`); }
       } catch (e) { bad++; console.log(`  ✗ ${e.message} ${url}`); }
     }
