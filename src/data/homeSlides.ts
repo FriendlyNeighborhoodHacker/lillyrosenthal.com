@@ -54,10 +54,10 @@ export const homeSlides: Slide[] = [
     // (shift+click the video in dev, with the window < 1000px wide, to get them).
     narrow: { fit: 'contain', scale: 1.8, centerX: 50, centerY: 45 },
   }),
-  //buildSlide('speeches/MOV_8271', { ...look, title: 'Speech / VP Student Government', link: '/speeches/', start: 3 }),
   buildSlide('speeches/2026_vice_president_speech_lilly', {...look, title: 'Student Government Speech - Frozen',
     narrow: { fit: 'contain', scale: 2.8, centerX: 45, centerY: 45 },
   }),
+  buildSlide('speeches/MOV_8271', { ...look, title: 'Speech / VP Student Government', link: '/speeches/', start: 3 }),
   buildSlide('speeches/01_IMG_8899', { ...look, title: 'Annie / Little Girls', link: '/speeches/', start: 3}),
   // ---- stills (each stays `stillSeconds`)
   buildSlide('stills/annabeth_fighting', { ...look, title: 'Percy Jackson / Annabeth', link: '/annabeth/', duration: stillSeconds }),
