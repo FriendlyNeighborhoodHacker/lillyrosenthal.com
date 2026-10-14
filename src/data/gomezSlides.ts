@@ -45,6 +45,13 @@ export const gomezSlides: Slide[] = [
     // (shift+click the video in dev, with the window < 1000px wide, to get them).
     narrow: { fit: 'contain', scale: 1.6, centerX: 50, centerY: 45 },
   }),
+  buildSlide('gomez/04_IMG_1126', { title: 'Gomez - Introduction',
+    // Landscape clip on a phone: zoom in instead of letterboxing. scale 1 = full
+    // width with bars; ~1.8 = smaller bars, sides cropped; fit: 'cover' = fills the
+    // screen. centerX/centerY = the point of the frame kept at screen center
+    // (shift+click the video in dev, with the window < 1000px wide, to get them).
+    narrow: { fit: 'contain', scale: 2.8, centerX: 50, centerY: 45 },
+  }),
   buildSlide('gomez/02_IMG_1212', { title: 'Gomez - Summoning Ancestors',
     // Landscape clip on a phone: zoom in instead of letterboxing. scale 1 = full
     // width with bars; ~1.8 = smaller bars, sides cropped; fit: 'cover' = fills the
@@ -54,13 +61,6 @@ export const gomezSlides: Slide[] = [
     narrowShift: 2,
   }),
   buildSlide('gomez/03_IMG_1232', { title: 'Gomez - Florida' }),
-  buildSlide('gomez/04_IMG_1126', { title: 'Gomez - Introduction',
-    // Landscape clip on a phone: zoom in instead of letterboxing. scale 1 = full
-    // width with bars; ~1.8 = smaller bars, sides cropped; fit: 'cover' = fills the
-    // screen. centerX/centerY = the point of the frame kept at screen center
-    // (shift+click the video in dev, with the window < 1000px wide, to get them).
-    narrow: { fit: 'contain', scale: 2.8, centerX: 50, centerY: 45 },
-  }),
   buildSlide('stills/gomez_dipping', { title: 'Addams Fmaily / Gomez', link: '/gomez/', duration: stillSeconds,
     narrow: { fit: 'contain', scale: 1.8, centerX: 50, centerY: 45 },
   }),
