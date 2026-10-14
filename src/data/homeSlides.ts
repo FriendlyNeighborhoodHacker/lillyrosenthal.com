@@ -58,7 +58,7 @@ export const homeSlides: Slide[] = [
     narrow: { fit: 'contain', scale: 2.8, centerX: 45, centerY: 45 },
   }),
   buildSlide('speeches/MOV_8271', { ...look, title: 'Speech / VP Student Government', link: '/speeches/', start: 3 }),
-  buildSlide('speeches/01_IMG_8899', { ...look, title: 'Annie / Little Girls', link: '/speeches/', start: 3}),
+  // buildSlide('speeches/01_IMG_8899', { ...look, title: 'Annie / Little Girls', link: '/speeches/', start: 3}),
   // ---- stills (each stays `stillSeconds`)
   buildSlide('stills/annabeth_fighting', { ...look, title: 'Percy Jackson / Annabeth', link: '/annabeth/', duration: stillSeconds }),
   buildSlide('stills/jumping', { ...look, title: 'You\'re a Good Man Charlie Brown / Snoopy', link: '/snoopy/', duration: stillSeconds,
