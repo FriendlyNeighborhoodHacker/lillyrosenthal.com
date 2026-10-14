@@ -58,6 +58,7 @@ export const gomezSlides: Slide[] = [
     // screen. centerX/centerY = the point of the frame kept at screen center
     // (shift+click the video in dev, with the window < 1000px wide, to get them).
     narrow: { fit: 'contain', scale: 1.6, centerX: 50, centerY: 45 },
+    transition: { type: 'fade', duration: 0 },
     narrowShift: 2,
   }),
   buildSlide('gomez/03_IMG_1232', { title: 'Gomez - Florida' }),
