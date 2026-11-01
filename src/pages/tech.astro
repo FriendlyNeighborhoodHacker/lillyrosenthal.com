@@ -23,6 +23,7 @@ function imagesFor(files: string[] = []) {
       const shots = imagesFor(p.screenshots);
       const external = p.link?.startsWith('http');
       const linkAttrs = external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+      // Only the heading links to the project site; screenshots are plain images.
       const wrap = (node: any) => (p.link ? <a href={p.link} {...linkAttrs}>{node}</a> : node);
       const shotStyle = p.shotAspect
         ? `--shot-aspect: ${p.shotAspect}; --shot-position: ${p.shotPosition ?? 'top'};`
@@ -36,7 +37,7 @@ function imagesFor(files: string[] = []) {
               <div class="tech-scrub-stage">
                 {shots.map((img, i) => (
                   <figure class="tech-shot" data-index={i} aria-hidden={i === 0 ? 'false' : 'true'}>
-                    {wrap(<Image src={img} alt={`${p.name} screenshot ${i + 1} of ${shots.length}`} width={900} />)}
+                    <Image src={img} alt={`${p.name} screenshot ${i + 1} of ${shots.length}`} width={900} />
                   </figure>
                 ))}
                 <button type="button" class="tech-arrow tech-arrow-prev" data-dir="-1" aria-label="Previous screenshot" disabled>&#8249;</button>
@@ -56,7 +57,7 @@ function imagesFor(files: string[] = []) {
               </div>
             </div>
           ) : shots.length === 1 ? (
-            <figure class="tech-shot">{wrap(<Image src={shots[0]} alt={`${p.name} screenshot`} width={900} />)}</figure>
+            <figure class="tech-shot"><Image src={shots[0]} alt={`${p.name} screenshot`} width={900} /></figure>
           ) : (
             <div class="tech-placeholder" aria-hidden="true"><span>Screenshot coming soon</span></div>
           )}
