@@ -39,6 +39,8 @@ function imagesFor(files: string[] = []) {
                     {wrap(<Image src={img} alt={`${p.name} screenshot ${i + 1} of ${shots.length}`} width={900} />)}
                   </figure>
                 ))}
+                <button type="button" class="tech-arrow tech-arrow-prev" data-dir="-1" aria-label="Previous screenshot" disabled>&#8249;</button>
+                <button type="button" class="tech-arrow tech-arrow-next" data-dir="1" aria-label="Next screenshot">&#8250;</button>
               </div>
               <div class="tech-dots" role="tablist">
                 {shots.map((_, i) => (
@@ -79,6 +81,7 @@ function imagesFor(files: string[] = []) {
     const stage = root.querySelector<HTMLElement>('.tech-scrub-stage')!;
     const shots = Array.from(root.querySelectorAll<HTMLElement>('.tech-shot'));
     const dots = Array.from(root.querySelectorAll<HTMLButtonElement>('.tech-dot'));
+    const arrows = Array.from(root.querySelectorAll<HTMLButtonElement>('.tech-arrow'));
     const n = shots.length;
     let current = 0;
 
@@ -90,7 +93,16 @@ function imagesFor(files: string[] = []) {
       current = i;
       shots[current].setAttribute('aria-hidden', 'false');
       dots[current].setAttribute('aria-selected', 'true');
+      for (const a of arrows) a.disabled = Number(a.dataset.dir) < 0 ? current === 0 : current === n - 1;
     };
+
+    // Arrow buttons (shown on narrow screens only, see CSS).
+    for (const a of arrows) {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        show(current + Number(a.dataset.dir));
+      });
+    }
 
     stage.addEventListener('pointermove', (e) => {
       if (e.pointerType !== 'mouse') return; // touch: use the dots / swipe instead

@@ -248,6 +248,7 @@ a {
 /* Hover-scrub viewer: all screenshots share one grid cell; only the current one is visible.
    The stage takes the height of the tallest, so the layout never jumps while scrubbing. */
 .tech-scrub-stage {
+  position: relative;
   display: grid;
   align-items: start;
   cursor: ew-resize;
@@ -263,6 +264,34 @@ a {
   opacity: 0;
   pointer-events: none;
 }
+
+/* prev/next arrows over the stage: hidden on desktop (hover scrubs), shown on phones */
+.tech-arrow {
+  display: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  padding: 0 0 3px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+  color: #222;
+  font-size: 1.9rem;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.tech-arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.tech-arrow-prev { left: 8px; }
+.tech-arrow-next { right: 8px; }
 
 .tech-dots {
   display: flex;
@@ -611,6 +640,14 @@ a.slide-title-text:hover { text-decoration: underline; }
   /* phones: screenshots first, then the text, for every project */
   .tech-project:nth-child(odd) .tech-text {
     order: 0;
+  }
+
+  .tech-arrow {
+    display: block;
+  }
+
+  .tech-scrub-stage {
+    cursor: default;
   }
 }
 
