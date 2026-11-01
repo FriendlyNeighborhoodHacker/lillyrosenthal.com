@@ -1,0 +1,119 @@
+---
+import { Image } from 'astro:assets';
+import ContentLayout from '../layouts/ContentLayout.astro';
+import { techProjects } from '../data/techProjects';
+
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/tech/*.{jpeg,jpg,png,webp}', {
+  eager: true,
+});
+
+/** Resolve the screenshot files that actually exist; warn about the rest. */
+function imagesFor(files: string[] = []) {
+  return files.flatMap((file) => {
+    const mod = images[`/src/assets/images/tech/${file}`];
+    if (!mod) console.warn(`Tech screenshot not found: src/assets/images/tech/${file}`);
+    return mod ? [mod.default] : [];
+  });
+}
+---
+
+<ContentLayout title="Tech Portfolio">
+  <ul class="tech-list">
+    {techProjects.map((p) => {
+      const shots = imagesFor(p.screenshots);
+      const external = p.link?.startsWith('http');
+      const linkAttrs = external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+      const wrap = (node: any) => (p.link ? <a href={p.link} {...linkAttrs}>{node}</a> : node);
+      const shotStyle = p.shotAspect
+        ? `--shot-aspect: ${p.shotAspect}; --shot-position: ${p.shotPosition ?? 'top'};`
+        : undefined;
+      return (
+        <li class="tech-project" style={shotStyle}>
+          {shots.length > 1 ? (
+            // Several screenshots: show one at a time. Moving the mouse across the image
+            // from left to right scrubs through them; the dots below also select one (phones).
+            <div class="tech-scrub" data-count={shots.length} aria-label={`${p.name} screenshots`}>
+              <div class="tech-scrub-stage">
+                {shots.map((img, i) => (
+                  <figure class="tech-shot" data-index={i} aria-hidden={i === 0 ? 'false' : 'true'}>
+                    {wrap(<Image src={img} alt={`${p.name} screenshot ${i + 1} of ${shots.length}`} width={900} />)}
+                  </figure>
+                ))}
+              </div>
+              <div class="tech-dots" role="tablist">
+                {shots.map((_, i) => (
+                  <button
+                    type="button"
+                    class="tech-dot"
+                    data-index={i}
+                    role="tab"
+                    aria-selected={i === 0 ? 'true' : 'false'}
+                    aria-label={`Screenshot ${i + 1} of ${shots.length}`}
+                  />
+                ))}
+              </div>
+            </div>
+          ) : shots.length === 1 ? (
+            <figure class="tech-shot">{wrap(<Image src={shots[0]} alt={`${p.name} screenshot`} width={900} />)}</figure>
+          ) : (
+            <div class="tech-placeholder" aria-hidden="true"><span>Screenshot coming soon</span></div>
+          )}
+          <div class="tech-text">
+            <h2 class="tech-name">{wrap(p.name)}</h2>
+            <p>{p.description}</p>
+            {p.link && (
+              <p class="tech-link"><a href={p.link} {...linkAttrs}>{p.link.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}</a></p>
+            )}
+          </div>
+        </li>
+      );
+    })}
+  </ul>
+</ContentLayout>
+
+<script>
+  // Hover-scrub screenshot viewer: the pointer's horizontal position over the
+  // stage picks which screenshot is visible (left edge = first, right edge = last).
+  // Dots under the stage select one by click/tap; arrow keys work when a dot has focus.
+  for (const root of document.querySelectorAll<HTMLElement>('.tech-scrub')) {
+    const stage = root.querySelector<HTMLElement>('.tech-scrub-stage')!;
+    const shots = Array.from(root.querySelectorAll<HTMLElement>('.tech-shot'));
+    const dots = Array.from(root.querySelectorAll<HTMLButtonElement>('.tech-dot'));
+    const n = shots.length;
+    let current = 0;
+
+    const show = (i: number) => {
+      i = Math.max(0, Math.min(n - 1, i));
+      if (i === current) return;
+      shots[current].setAttribute('aria-hidden', 'true');
+      dots[current].setAttribute('aria-selected', 'false');
+      current = i;
+      shots[current].setAttribute('aria-hidden', 'false');
+      dots[current].setAttribute('aria-selected', 'true');
+    };
+
+    stage.addEventListener('pointermove', (e) => {
+      if (e.pointerType !== 'mouse') return; // touch: use the dots / swipe instead
+      const r = stage.getBoundingClientRect();
+      show(Math.floor(((e.clientX - r.left) / r.width) * n));
+    });
+
+    // Touch: swipe left/right across the stage.
+    let touchX: number | null = null;
+    stage.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+    stage.addEventListener('touchend', (e) => {
+      if (touchX === null) return;
+      const dx = e.changedTouches[0].clientX - touchX;
+      touchX = null;
+      if (Math.abs(dx) > 40) show(current + (dx < 0 ? 1 : -1));
+    });
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => show(i));
+      dot.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') { show(current + 1); dots[current].focus(); e.preventDefault(); }
+        if (e.key === 'ArrowLeft') { show(current - 1); dots[current].focus(); e.preventDefault(); }
+      });
+    });
+  }
+</script>

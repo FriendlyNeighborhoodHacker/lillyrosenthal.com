@@ -182,6 +182,144 @@ a {
   display: block;
 }
 
+/* ----- Tech portfolio ----- */
+.tech-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tech-project {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: 1.75rem;
+  align-items: start;
+  padding: 1.75rem 0;
+  border-top: 1px solid #ddd;
+}
+
+.tech-project:first-child {
+  border-top: none;
+  padding-top: 0.5rem;
+}
+
+/* Desktop: alternate sides. 1st, 3rd, ... projects put the text on the left and the
+   screenshots on the right; 2nd, 4th, ... the other way round. */
+.tech-project:nth-child(odd) {
+  grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+}
+
+.tech-project:nth-child(odd) .tech-text {
+  order: -1;
+}
+
+.tech-shot {
+  margin: 0;
+}
+
+.tech-shot img,
+.tech-placeholder {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* optional per-project crop (techProjects.ts shotAspect / shotPosition) */
+.tech-shot img {
+  aspect-ratio: var(--shot-aspect, auto);
+  object-fit: cover;
+  object-position: var(--shot-position, top);
+}
+
+.tech-placeholder {
+  aspect-ratio: 16 / 10;
+  background: #f1f1f1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Hover-scrub viewer: all screenshots share one grid cell; only the current one is visible.
+   The stage takes the height of the tallest, so the layout never jumps while scrubbing. */
+.tech-scrub-stage {
+  display: grid;
+  align-items: start;
+  cursor: ew-resize;
+  touch-action: pan-y;
+}
+
+.tech-scrub-stage .tech-shot {
+  grid-area: 1 / 1;
+  transition: opacity 0.15s ease;
+}
+
+.tech-scrub-stage .tech-shot[aria-hidden='true'] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.tech-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.tech-dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: 1px solid #555;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
+.tech-dot[aria-selected='true'] {
+  background: #222;
+  border-color: #222;
+}
+
+.tech-name {
+  font-family: 'Josefin Sans', 'Optima', 'Gill Sans', 'Gill Sans MT', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.6rem;
+  color: #222;
+}
+
+.tech-name a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.tech-name a:hover {
+  text-decoration: underline;
+}
+
+.tech-text p {
+  margin-bottom: 0;
+}
+
+.tech-link {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.tech-link a {
+  color: #222;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 /* ======================================================
    FULL-BLEED SLIDESHOW
    ====================================================== */
@@ -462,6 +600,17 @@ a.slide-title-text:hover { text-decoration: underline; }
     float: none;
     width: 100%;
     max-width: none;
+  }
+
+  .tech-project,
+  .tech-project:nth-child(odd) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  /* phones: screenshots first, then the text, for every project */
+  .tech-project:nth-child(odd) .tech-text {
+    order: 0;
   }
 }
 

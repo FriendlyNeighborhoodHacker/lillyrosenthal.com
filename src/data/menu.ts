@@ -8,5 +8,6 @@ export const menu: MenuItem[] = [
   { name: 'Annabeth', url: '/annabeth/' },
   { name: 'Gomez', url: '/gomez/' },
   { name: 'Speeches', url: '/speeches/' },
+  { name: 'Tech', url: '/tech/' },
   { name: 'Bio', url: '/bio/' },
 ];
