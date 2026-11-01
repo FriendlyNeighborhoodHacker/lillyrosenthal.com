@@ -48,4 +48,5 @@ export const speechesSlides: Slide[] = [
     narrow: { fit: 'contain', scale: 2.8, centerX: 45, centerY: 45 },
   }),
   //buildSlide('speeches/eighth_grade_speech', { title: 'Eighth Grade Speech' }),
+  buildSlide('speeches/IMG_6713', { title: 'Cornell International Debate Tournament - Semi-finals' }),
 ].filter((s): s is Slide => Boolean(s));

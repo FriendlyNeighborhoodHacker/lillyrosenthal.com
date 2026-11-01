@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-14T19:13:29.638Z",
+  "generatedAt": "2026-11-01T15:36:37.788Z",
   "clips": {
     "annabeth/01_IMG_3655": {
       "section": "annabeth",
@@ -190,6 +190,16 @@
       "height": 720,
       "duration": 102.31,
       "bytes": 78248040
+    },
+    "speeches/IMG_6713": {
+      "section": "speeches",
+      "type": "video",
+      "src": "/media/speeches/IMG_6713.mp4",
+      "poster": "/media/speeches/IMG_6713.poster.jpg",
+      "width": 1920,
+      "height": 1080,
+      "duration": 31.84,
+      "bytes": 16623365
     },
     "speeches/MOV_8271": {
       "section": "speeches",
