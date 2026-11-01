@@ -26,11 +26,10 @@ export interface TechProject {
 export const techProjects: TechProject[] = [
   {
     name: 'Hackley Clubz',
-    link: 'https://www.hackleyclubz.org/public/',
     extraLinks: [{ title: 'Walkthrough', url: 'https://docs.hackleyclubz.org/walkthroughs/overview/' }],
     shotAspect: '1 / 1',
     description:
-      'Hackley School wanted to create a club management portal so that students could know what clubs they’re in and club leaders could manage their roster and events in a centralized way. I built an iOS application (published on the Apple App Store) and a web application as well.',
+      'Hackley School wanted to create a club management portal so that students could know what clubs they’re in and club leaders could manage their roster and events in a centralized way. I built an iOS application (published on the Apple App Store) and a web application as well. Launched in September 2026, it is used by 400+ students and faculty to manage 75 clubs.',
     screenshots: [
       'hackley-clubz-logo.png',
       'hackley-clubz-browse.webp',
@@ -43,7 +42,7 @@ export const techProjects: TechProject[] = [
   {
     name: 'Bronx Conservatory of Music Portal',
     description:
-      'This is a non-profit that offers low-cost private music classes to children in the Bronx. They wanted to have a central way to manage enrollment and lesson management.',
+      'This is a non-profit that offers low-cost private music classes to children in the Bronx. They wanted to have a central way to manage enrollment and lesson management. Built for 150+ students and 20+ teachers.',
     screenshots: ['bronx-conservatory-1.png', 'bronx-conservatory-2.png', 'bronx-conservatory-3.png'],
   },
   {

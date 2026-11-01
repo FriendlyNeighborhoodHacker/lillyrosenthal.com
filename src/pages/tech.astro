@@ -66,9 +66,9 @@ function imagesFor(files: string[] = []) {
             {(p.link || p.extraLinks?.length) && (
               <p class="tech-link">
                 {p.link && <a href={p.link} {...linkAttrs}>{p.link.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}</a>}
-                {p.extraLinks?.map((l) => (
+                {p.extraLinks?.map((l, i) => (
                   <>
-                    {' '}<span class="tech-link-sep" aria-hidden="true">·</span>{' '}
+                    {(p.link || i > 0) && <>{' '}<span class="tech-link-sep" aria-hidden="true">·</span>{' '}</>}
                     <a href={l.url} target="_blank" rel="noopener noreferrer">{l.title}</a>
                   </>
                 ))}
