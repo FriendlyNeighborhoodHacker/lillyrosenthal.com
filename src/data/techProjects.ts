@@ -7,6 +7,7 @@
  *                stacked in this order. Optional: a project with none, or whose files
  *                are all missing, shows a neutral placeholder box instead.
  *   link         optional URL; makes the heading and screenshots clickable
+ *   extraLinks   optional further links shown under the description, e.g. [{ title: 'Walkthrough', url: '...' }]
  *   shotAspect   optional CSS aspect ratio the screenshots are cropped to when displayed,
  *                e.g. '1 / 1' for a square (tall phone shots), '16 / 10'. Default: natural size.
  *   shotPosition which part of the image to keep when cropping (CSS object-position),
@@ -17,6 +18,7 @@ export interface TechProject {
   description: string;
   screenshots?: string[];
   link?: string;
+  extraLinks?: { title: string; url: string }[];
   shotAspect?: string;
   shotPosition?: string;
 }
@@ -25,6 +27,7 @@ export const techProjects: TechProject[] = [
   {
     name: 'Hackley Clubz',
     link: 'https://www.hackleyclubz.org/public/',
+    extraLinks: [{ title: 'Walkthrough', url: 'https://docs.hackleyclubz.org/walkthroughs/overview/' }],
     shotAspect: '1 / 1',
     description:
       'Hackley School wanted to create a club management portal so that students could know what clubs they’re in and club leaders could manage their roster and events in a centralized way. I built an iOS application (published on the Apple App Store) and a web application as well.',
