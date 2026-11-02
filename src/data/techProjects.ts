@@ -43,7 +43,13 @@ export const techProjects: TechProject[] = [
     name: 'Bronx Conservatory of Music Portal',
     description:
       'This is a non-profit that offers low-cost private music classes to children in the Bronx. They wanted to have a central way to manage enrollment and lesson management so the staff can focus on delivering their program well instead of the significant administration work of tracking student registrations and lesson attendance. Built for 150+ students and 20+ teachers.',
-    screenshots: ['bronx-conservatory-1.png', 'bronx-conservatory-2.png', 'bronx-conservatory-3.png'],
+    screenshots: [
+      'bronx-conservatory-1.png',
+      'bronx-conservatory-2.png',
+      'bronx-conservatory-3.png',
+      'bronx-conservatory-4.png',
+      'bronx-conservatory-5.png',
+    ],
   },
   {
     name: 'Judy Rosenthal Portfolio',
