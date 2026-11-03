@@ -55,7 +55,7 @@ export const techProjects: TechProject[] = [
     name: 'Judy Rosenthal Portfolio',
     link: 'https://www.judyrosenthal.com',
     description:
-      'Judy Rosenthal is an artist in Houston, Texas, and the site showcases her artwork.',
+      'Judy Rosenthal is an artist in Houston, Texas, and the site showcases her artwork. This site (lillyrosenthal.org) is built on the framework that I built for this.',
     screenshots: [
       'judy-rosenthal-1.png',
       'judy-rosenthal-2.png',
