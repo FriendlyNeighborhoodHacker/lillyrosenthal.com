@@ -35,7 +35,7 @@ and is never served; after the worktree is created and after every agent
 turn the bridge runs [agent/preview-setup.sh](../agent/preview-setup.sh)
 in it, which copies the preview `.env` in, runs `npm ci` and `npm run build`,
 and publishes `dist/` (minus the webhook file) at
-`~/previews/lillyrosenthal-org-<slug>/www/`. The first build in a fresh
+`~/previews/lillyrosenthal-<slug>/www/`. The first build in a fresh
 worktree installs the npm packages, about a minute; later builds are quick.
 The server never holds clips: the preview plays video from the bucket like
 production does, and the agent cannot import or upload media (that needs
@@ -48,11 +48,11 @@ Lilly's Dropbox and the R2 keys, which stay on the laptop).
 | `~/.nvm/` | Node 22 (the site needs 22.12 or newer; Debian's package is older) |
 | `~/agents/lillyrosenthal.org/repo/` | main clone of this repository, always on `main`; the prompt, permissions and hook are read from its `agent/` |
 | `~/agents/lillyrosenthal.org/worktrees/<slug>/` | one worktree per building thread, branch `feature/<slug>` |
-| `~/previews/lillyrosenthal-org-<slug>/www/` | the built preview, served as `https://lillyrosenthal-org-<slug>.preview1.rosenthaltechnologies.com` |
+| `~/previews/lillyrosenthal-<slug>/www/` | the built preview, served as `https://lillyrosenthal-<slug>.preview1.rosenthaltechnologies.com` |
 
 | Host / service | |
 |---|---|
-| Previews | `lillyrosenthal-org-*.preview1.rosenthaltechnologies.com` (vhost `preview-lillyrosenthal.conf`) |
+| Previews | `lillyrosenthal-*.preview1.rosenthaltechnologies.com` (vhost `preview-lillyrosenthal.conf`) |
 | Bridge | systemd `swe-lillyrosenthal.org.service`, runs `/usr/local/lib/swe-bridge/bridge.py` as `lillyrosenthal` |
 | Discord | bot **SWE - lillyrosenthal.org**, its own channel, roles `builder` / `shipper` |
 | Production | unchanged: push to `main` → `gitwebhook.php` on the DreamHost VPS runs `scripts/deploy.sh` |
@@ -124,10 +124,10 @@ The `npm ci` is the slow part the first time.
 ```
 git -C ~/agents/lillyrosenthal.org/repo worktree add -b feature/smoke ~/agents/lillyrosenthal.org/worktrees/smoke main
 cd ~/agents/lillyrosenthal.org/worktrees/smoke
-PREVIEW_ROOT=$HOME/previews/lillyrosenthal-org-smoke/www bash agent/preview-setup.sh
-ls ~/previews/lillyrosenthal-org-smoke/www                 # index.html, snoopy/, ..., no gitwebhook.php, no media/
-curl -sI https://lillyrosenthal-org-smoke.preview1.rosenthaltechnologies.com/ | head -1          # HTTP/1.1 200
-curl -sI https://lillyrosenthal-org-smoke.preview1.rosenthaltechnologies.com/snoopy/ | head -1   # HTTP/1.1 200
+PREVIEW_ROOT=$HOME/previews/lillyrosenthal-smoke/www bash agent/preview-setup.sh
+ls ~/previews/lillyrosenthal-smoke/www                 # index.html, snoopy/, ..., no gitwebhook.php, no media/
+curl -sI https://lillyrosenthal-smoke.preview1.rosenthaltechnologies.com/ | head -1          # HTTP/1.1 200
+curl -sI https://lillyrosenthal-smoke.preview1.rosenthaltechnologies.com/snoopy/ | head -1   # HTTP/1.1 200
 ```
 
 Open it in a browser: the slideshow should play, with video coming from the
@@ -135,7 +135,7 @@ bucket. Then clean up:
 
 ```
 cd
-rm -rf ~/previews/lillyrosenthal-org-smoke
+rm -rf ~/previews/lillyrosenthal-smoke
 git -C ~/agents/lillyrosenthal.org/repo worktree remove --force ~/agents/lillyrosenthal.org/worktrees/smoke
 git -C ~/agents/lillyrosenthal.org/repo branch -D feature/smoke
 ```
@@ -186,7 +186,7 @@ Put both values in `~lillyrosenthal/agents/lillyrosenthal.org/agent.env`.
 sudo cp /home/lillyrosenthal/agents/lillyrosenthal.org/repo/agent/swe-lillyrosenthal.org.service /etc/systemd/system/
 sudo systemctl daemon-reload
 sudo systemctl enable --now swe-lillyrosenthal.org
-journalctl -fu swe-lillyrosenthal.org -o cat      # "bridge ready as SWE - lillyrosenthal.org#…; model fable; previews lillyrosenthal-org-*.… (build)"
+journalctl -fu swe-lillyrosenthal.org -o cat      # "bridge ready as SWE - lillyrosenthal.org#…; model fable; previews lillyrosenthal-*.… (build)"
 ```
 
 ### First run: a trivial, safe change
@@ -195,7 +195,7 @@ Nothing is created, and no preview link is posted, until the agent starts a
 change.
 
 - [ ] Post in the channel: *Which pages does the site have?* A thread and the answer, nothing else. `status` lists it as "talking".
-- [ ] Post: *Swap the first two slides on the Snoopy page.* The bot posts a short plan, then "Building on branch `feature/<slug>`" with a `lillyrosenthal-org-<slug>` preview link (allow a minute for the first build), then the report: what changed, a `Preview:` link to `/snoopy/`, a `Commit message:` line, and `changes.diff` touching `src/data/snoopySlides.ts`.
+- [ ] Post: *Swap the first two slides on the Snoopy page.* The bot posts a short plan, then "Building on branch `feature/<slug>`" with a `lillyrosenthal-<slug>` preview link (allow a minute for the first build), then the report: what changed, a `Preview:` link to `/snoopy/`, a `Commit message:` line, and `changes.diff` touching `src/data/snoopySlides.ts`.
 - [ ] Open the preview: the Snoopy slideshow starts with the other clip.
 - [ ] Reply **discard**: the preview link returns 404; `git -C ~lillyrosenthal/agents/lillyrosenthal.org/repo worktree list` shows only the main clone.
 - [ ] Repeat the request, then **approve** from a shipper. The bridge posts the sha, the commit is on GitHub `main`, GitHub → Settings → Webhooks shows the delivery, and lillyrosenthal.org/snoopy/ shows the new order within a minute or two. Then request swapping them back the same way.

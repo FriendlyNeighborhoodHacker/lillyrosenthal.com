@@ -3,7 +3,7 @@
 "SWE - lillyrosenthal.org" changes this site from a Discord thread. A question
 gets an answer and nothing is created; a request is built in a worktree of its
 own and shown at its own preview hostname
-(`https://lillyrosenthal-org-<slug>.preview1.rosenthaltechnologies.com`),
+(`https://lillyrosenthal-<slug>.preview1.rosenthaltechnologies.com`),
 posted when the build starts; on an explicit **approve** the bridge commits to
 `main`, and the GitHub webhook rebuilds lillyrosenthal.org.
 

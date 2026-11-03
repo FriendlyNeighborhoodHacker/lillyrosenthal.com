@@ -6,7 +6,7 @@
 # preview always shows the tree as it is. Idempotent; the worktree is never served.
 #
 # By hand, from a worktree:
-#   PREVIEW_ROOT=$HOME/previews/lillyrosenthal-org-smoke/www bash agent/preview-setup.sh
+#   PREVIEW_ROOT=$HOME/previews/lillyrosenthal-smoke/www bash agent/preview-setup.sh
 #
 # Keep this in step with scripts/deploy.sh: both must build the same thing.
 set -euo pipefail
