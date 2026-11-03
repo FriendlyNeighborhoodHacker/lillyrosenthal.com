@@ -8,7 +8,7 @@ posted when the build starts; on an explicit **approve** the bridge commits to
 `main`, and the GitHub webhook rebuilds lillyrosenthal.org.
 
 The bridge program that runs the agent is shared by every agent on the dev
-VPS and lives in the `dreamhost.dev.agent` repository
+VPS and lives in the `it-agents` repository
 (`agent/bridge.py`, explained in its `docs/swe-bridge.md`). This directory is
 the part that belongs to this site; the setup is in
 [docs/engineer-agent.md](../docs/engineer-agent.md).
