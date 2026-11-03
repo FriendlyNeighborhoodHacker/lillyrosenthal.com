@@ -12,7 +12,7 @@ This is the setup guide for this site's agent. It runs on the dev VPS
 an "engineer" account that can take on several sites, each in its own
 `~/agents/<site>/`; this site is `~/agents/lillyrosenthal.org/`. The bridge
 program and the preview scheme are shared by every agent on the machine and
-are documented in the `portal.bronxconservatory.org` repository:
+are documented in the `dreamhost.dev.agent` repository:
 
 - `docs/swe-bridge.md`: what the bridge does, the thread words (**status**,
   **discard**, **approve**), how a thread goes from conversation to build,
@@ -206,7 +206,7 @@ change.
 
 - **Change the agent.** Edit `agent/agent-prompt.md`, `agent/settings.json`
   or `agent/preview-setup.sh`, push to `main`; the next new thread uses them.
-  The bridge program is shared: `docs/swe-bridge.md` in the portal repository.
+  The bridge program is shared: `docs/swe-bridge.md` in the `dreamhost.dev.agent` repository.
 - **Keep two things in step** when the build changes: `scripts/deploy.sh`
   and `agent/preview-setup.sh` build the same thing.
 - **New clips** still go through the laptop: `npm run import-media`,

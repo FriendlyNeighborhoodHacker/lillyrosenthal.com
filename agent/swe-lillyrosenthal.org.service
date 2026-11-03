@@ -1,7 +1,7 @@
 # /etc/systemd/system/swe-lillyrosenthal.org.service
 # Runs the machine-wide swe-bridge for this repository's agent, as the
 # lillyrosenthal account. The bridge and its guide live in the
-# portal.bronxconservatory.org repository (agent/bridge.py, docs/swe-bridge.md).
+# dreamhost.dev.agent repository (bridge/bridge.py, docs/swe-bridge.md).
 #   sudo systemctl daemon-reload && sudo systemctl enable --now swe-lillyrosenthal.org
 #   journalctl -fu swe-lillyrosenthal.org
 [Unit]
