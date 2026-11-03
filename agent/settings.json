@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Read", "Edit", "Write", "Glob", "Grep",
+      "Bash(git status*)", "Bash(git diff*)", "Bash(git log*)", "Bash(git show*)",
+      "Bash(git blame*)", "Bash(git grep*)", "Bash(git ls-files*)", "Bash(git rev-parse*)",
+      "Bash(npm run build*)", "Bash(npm run build:raw*)", "Bash(npm ci*)", "Bash(npm install*)", "Bash(npm ls*)",
+      "Bash(npm view*)", "Bash(npx astro*)", "Bash(node *)", "Bash(php -l *)",
+      "Bash(ls *)", "Bash(cat *)", "Bash(head *)", "Bash(tail *)", "Bash(grep *)", "Bash(find *)",
+      "Bash(wc *)", "Bash(echo *)", "Bash(cd *)", "Bash(pwd)", "Bash(sort *)", "Bash(uniq *)",
+      "Bash(diff *)", "Bash(mkdir *)", "Bash(cp *)", "Bash(mv *)", "Bash(touch *)", "Bash(sed *)",
+      "Bash(awk *)", "Bash(date*)", "Bash(curl *)", "Bash(file *)"
+    ],
+    "deny": [
+      "Bash(git commit*)", "Bash(git push*)", "Bash(git merge*)", "Bash(git rebase*)", "Bash(git checkout*)",
+      "Bash(git switch*)", "Bash(git reset*)", "Bash(git stash*)", "Bash(git clean*)", "Bash(git branch*)",
+      "Bash(git worktree*)", "Bash(git remote*)", "Bash(git config*)", "Bash(git add*)", "Bash(git rm*)",
+      "Bash(npm run import-media*)", "Bash(npm run upload-media*)", "Bash(npm publish*)",
+      "Bash(rm -r*)", "Bash(rm -f*)", "Bash(sudo *)", "Bash(ssh *)", "Bash(scp *)", "Bash(wget *)",
+      "Edit(**/.env)", "Edit(**/.env.*)", "Read(**/config.local.php)", "Edit(**/config.local.php)",
+      "Read(**/agent.env)", "Read(**/.ssh/**)", "Edit(**/.github/**)",
+      "Edit(/home/lillyrosenthal/agents/lillyrosenthal.org/repo/**)",
+      "Edit(**/.claude/**)"
+    ]
+  }
+}

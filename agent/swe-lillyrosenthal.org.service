@@ -1,0 +1,23 @@
+# /etc/systemd/system/swe-lillyrosenthal.org.service
+# Runs the machine-wide swe-bridge for this repository's agent, as the
+# lillyrosenthal account. The bridge and its guide live in the
+# portal.bronxconservatory.org repository (agent/bridge.py, docs/swe-bridge.md).
+#   sudo systemctl daemon-reload && sudo systemctl enable --now swe-lillyrosenthal.org
+#   journalctl -fu swe-lillyrosenthal.org
+[Unit]
+Description=swe-bridge for the lillyrosenthal.org engineer agent (SWE - lillyrosenthal.org)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=lillyrosenthal
+WorkingDirectory=/home/lillyrosenthal/agents/lillyrosenthal.org
+EnvironmentFile=/home/lillyrosenthal/agents/lillyrosenthal.org/agent.env
+Environment=PATH=/home/lillyrosenthal/.local/bin:/usr/local/bin:/usr/bin:/bin
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/usr/local/lib/swe-bridge/venv/bin/python /usr/local/lib/swe-bridge/bridge.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
