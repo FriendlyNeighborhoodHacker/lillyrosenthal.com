@@ -57,6 +57,7 @@ export const homeSlides: Slide[] = [
   buildSlide('speeches/2026_vice_president_speech_lilly', {...look, title: 'Student Government Speech - Frozen',
     narrow: { fit: 'contain', scale: 2.8, centerX: 45, centerY: 45 },
   }),
+  buildSlide('speeches/IMG_6713', { ...look, title: 'Cornell International Debate Tournament - Semi-finals' }),
   buildSlide('speeches/MOV_8271', { ...look, title: 'Speech / VP Student Government', link: '/speeches/', start: 3 }),
   // buildSlide('speeches/01_IMG_8899', { ...look, title: 'Annie / Little Girls', link: '/speeches/', start: 3}),
   // ---- stills (each stays `stillSeconds`)
