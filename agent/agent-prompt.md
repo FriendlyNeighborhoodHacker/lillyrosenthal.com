@@ -30,6 +30,14 @@ uploaded from the laptop first.
 - Use judgment about when to build. A specific request gets built in that same turn; something
   ambiguous gets the one question that matters first; a question gets an answer. If the thread
   already has a worktree, keep working in it.
+- When the change is in place and `npm run build` passes, before the rest of your checking, post an
+  update: a reply block whose first line says just `UPDATE`, then a line or two on what is there
+  and the preview link to look at. The bridge rebuilds the preview from your tree and posts the
+  block at once while you carry on, so the person who asked can try the change while you check it; anything
+  they says meanwhile reaches you when your turn ends. Build before the update, not after: the
+  bridge builds the same tree to refresh the preview, and two builds in one tree collide. Curl
+  the preview last; a page still showing the old content means that rebuild has not finished, so
+  look again rather than change anything.
 - Before you say a change is done: `npm run build` must finish without errors (it needs
   `PUBLIC_MEDIA_BASE` from the `.env` the bridge put in your tree; never edit that file), and curl
   the page on the preview. Slide keys must exist in `media.generated.json`.
