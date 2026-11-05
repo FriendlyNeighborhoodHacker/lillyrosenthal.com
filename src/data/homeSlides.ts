@@ -59,7 +59,6 @@ export const homeSlides: Slide[] = [
   //}),
   //buildSlide('speeches/IMG_6713', { ...look, title: 'Cornell International Debate Tournament - Semi-finals' }),
   buildSlide('speeches/MOV_8271', { ...look, title: 'Speech / VP Student Government', link: '/speeches/', start: 3 }),
-  // buildSlide('speeches/01_IMG_8899', { ...look, title: 'Annie / Little Girls', link: '/speeches/', start: 3}),
   // ---- stills (each stays `stillSeconds`)
   buildSlide('stills/annabeth_fighting', { ...look, title: 'Percy Jackson / Annabeth', link: '/annabeth/', duration: stillSeconds }),
   buildSlide('stills/jumping', { ...look, title: 'You\'re a Good Man Charlie Brown / Snoopy', link: '/snoopy/', duration: stillSeconds,
@@ -70,6 +69,7 @@ export const homeSlides: Slide[] = [
   }),
   buildSlide('stills/gomez_waving_cape', { ...look, title: 'Addams Fmaily / Gomez', link: '/gomez/', duration: stillSeconds}),
   buildSlide('stills/lilly_as_annabeth', { ...look, title: 'Percy Jackson / Annabeth', link: '/annabeth/', duration: stillSeconds }),
+  // buildSlide('speeches/01_IMG_8899', { ...look, title: 'Annie / Little Girls', link: '/speeches/', start: 3}),
   //buildSlide('stills/annabeth_still1', { ...look, title: 'Percy Jackson / Annabeth', link: '/annabeth/', duration: stillSeconds }),
   //buildSlide('stills/kicking', { ...look, title: 'Addams Family / Gomez', link: '/gomez/', duration: stillSeconds }),
 ].filter((s): s is Slide => Boolean(s));
